@@ -68,8 +68,8 @@ ul {
 		display: flex;
 		img {
 			margin: 2rem 2rem;
-			width: 385px;
-			height: 587.5px;
+			width: 300px;
+			height: 450px;
 			object-fit: cover;
 		}
 
@@ -77,17 +77,17 @@ ul {
 			margin: 2rem 2rem;
 			h2 {
 				margin: 1rem 0;
-				font-size: 2.5rem;
+				font-size: 2.1rem;
 				font-weight: 500;
 			}
 			span {
 				font-weight: 200;
-				font-size: 1.2rem;
+				font-size: 1.1rem;
 			}
 			p {
 				margin: 1rem 0;
 				font-weight: 300;
-				font-size: 1.4rem;
+				font-size: 1.3rem;
 			}
 		}
 	}
@@ -95,13 +95,13 @@ ul {
 
 // Responsive media queries
 @media (max-width: 1024px) {
-	.movie-info {
+	.details {
 		.wrapper {
 			img {
 				width: 289px;
 				height: 441px;
 			}
-			.movie-details {
+			.desc {
 				h2 {
 					font-size: 2rem;
 				}
@@ -117,7 +117,7 @@ ul {
 	.wrapper {
 		flex-direction: column;
 		align-items: center;
-		.movie-details {
+		.desc {
 			display: flex;
 			flex-direction: column;
 			align-items: center;
