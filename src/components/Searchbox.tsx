@@ -14,16 +14,16 @@ export const Searchbox: React.FC = () => {
 		e.preventDefault();
 		if (location.pathname === '/') {
 			searchMovies(dispatch, text);
-			console.log('movies');
+			// console.log('movies');
 		} else if (location.pathname === '/serials') {
 			searchSerials(dispatch, text);
-			console.log('serials');
+			// console.log('serials');
 		} else {
 			searchActors(dispatch, text);
-			console.log('actors');
+			// console.log('actors');
 		}
 		setText('');
-		console.log(text);
+		// console.log(text);
 	};
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
