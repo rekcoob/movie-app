@@ -30,7 +30,13 @@ export const Searchbox: React.FC<Props> = (props) => {
 			<form onSubmit={handleSubmit}>
 				<input
 					type="text"
-					placeholder="Search..."
+					placeholder={
+						props.movies
+							? 'Search movies...'
+							: props.serials
+							? 'Search serials...'
+							: 'Search actors...'
+					}
 					value={text}
 					onChange={(e) => setText(e.target.value)}
 				/>
