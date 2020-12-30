@@ -1,4 +1,11 @@
-import { StateType, ActionType, ACTIONS } from './types';
+import {
+	StateType,
+	ActionType,
+	ACTIONS,
+	IMovie,
+	ISerial,
+	IActor,
+} from './types';
 
 export const reducer = (state: StateType, action: ActionType) => {
 	switch (action.type) {
@@ -41,21 +48,21 @@ export const reducer = (state: StateType, action: ActionType) => {
 		case ACTIONS.CLEAR_MOVIE: {
 			return {
 				...state,
-				movie: {},
+				movie: {} as IMovie,
 				loading: false,
 			};
 		}
 		case ACTIONS.CLEAR_SERIAL: {
 			return {
 				...state,
-				serial: {},
+				serial: {} as ISerial,
 				loading: false,
 			};
 		}
 		case ACTIONS.CLEAR_ACTOR: {
 			return {
 				...state,
-				actor: {},
+				actor: {} as IActor,
 				loading: false,
 			};
 		}

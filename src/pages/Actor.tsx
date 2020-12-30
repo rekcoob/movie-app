@@ -6,10 +6,6 @@ import { getActor } from '../context/actions';
 import { Spinner } from '../components/Spinner';
 import { IMG_API, NO_IMAGE } from '../globalVariables';
 
-type Params = {
-	id: string;
-};
-
 export const Actor: React.FC = () => {
 	const {
 		state: {
@@ -18,7 +14,7 @@ export const Actor: React.FC = () => {
 		},
 		dispatch,
 	} = useContext(AppCtx);
-	const { id } = useParams<Params>();
+	const { id } = useParams<{ id: string }>();
 
 	useEffect(() => {
 		getActor(dispatch, +id);

@@ -41,11 +41,11 @@ export interface IGenre {
 }
 
 export type StateType = {
-	movies: IMovie[];
-	movie: IMovie | any;
-	serials: ISerial[];
+	movies: IMovie[] | null;
+	movie: IMovie;
+	serials: ISerial[] | null;
 	serial: ISerial | any;
-	actors: IActor[];
+	actors: IActor[] | null;
 	actor: IActor | any;
 	loading: boolean;
 };

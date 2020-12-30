@@ -1,14 +1,14 @@
 import React, { createContext, Dispatch, useReducer } from 'react';
 import { reducer } from './reducer';
-import { StateType, ActionType } from './types';
+import { StateType, ActionType, IMovie, IActor, ISerial } from './types';
 
 const initialState = {
-	movies: [],
-	movie: {},
-	serials: [],
-	serial: {},
-	actors: [],
-	actor: {},
+	movies: null,
+	movie: {} as IMovie,
+	serials: null,
+	serial: {} as ISerial,
+	actors: null,
+	actor: {} as IActor,
 	loading: false,
 };
 

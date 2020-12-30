@@ -7,10 +7,6 @@ import { Spinner } from '../components/Spinner';
 import { IMG_API, NO_IMAGE } from '../globalVariables';
 import { IGenre } from '../context/types';
 
-type Params = {
-	id: string;
-};
-
 export const Movie: React.FC = () => {
 	const {
 		state: {
@@ -26,7 +22,7 @@ export const Movie: React.FC = () => {
 		},
 		dispatch,
 	} = useContext(AppCtx);
-	const { id } = useParams<Params>();
+	const { id } = useParams<{ id: string }>();
 
 	useEffect(() => {
 		getMovie(dispatch, +id);
