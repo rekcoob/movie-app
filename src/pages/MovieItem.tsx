@@ -1,37 +1,17 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMovie } from '../store/actions';
-
 import Moment from 'react-moment';
-// import { AppCtx } from '../context/AppCtx';
-// import {
-// 	getMovie,
-// 	addToFavorites,
-// 	removeFromFavorites,
-// } from '../context/actions';
 import { Spinner } from '../components/Spinner';
 import { IMG_API, NO_IMAGE } from '../globalVariables';
-import { IGenre } from '../context/types';
+import { RootState } from '../store/types';
 
 export const MovieItem: React.FC = () => {
 	const { id } = useParams<{ id: string }>();
-	// const {
-	// 	state: { loading, movie, favorites },
-	// 	dispatch,
-	// } = useContext(AppCtx);
-	// const {
-	// 	title,
-	// 	poster_path,
-	// 	vote_average,
-	// 	release_date,
-	// 	overview,
-	// 	genres,
-	// } = movie;
-
 	const dispatch = useDispatch();
 
-	const movieItem = useSelector((state: any) => state.movieItem);
+	const movieItem = useSelector((state: RootState) => state.movieItem);
 	const { loading, movie } = movieItem;
 	const {
 		title,
@@ -43,7 +23,6 @@ export const MovieItem: React.FC = () => {
 	} = movie;
 
 	useEffect(() => {
-		// getMovie(dispatch, +id);
 		dispatch(getMovie(+id));
 	}, [dispatch, id]);
 
@@ -113,7 +92,7 @@ export const MovieItem: React.FC = () => {
 					</span>
 					<div className="genres">
 						{genres &&
-							genres.map((genre: IGenre, id: number) => (
+							genres.map((genre, id) => (
 								<span key={genre.id}>{(id ? ', ' : '') + genre.name} </span>
 							))}
 					</div>

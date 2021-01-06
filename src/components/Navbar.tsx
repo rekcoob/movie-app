@@ -8,7 +8,7 @@ type Props = {
 };
 
 export const Navbar: React.FC<Props> = ({
-	title = 'MovieApp',
+	title = 'Movie App',
 	icon = 'fas fa-video',
 }) => {
 	return (

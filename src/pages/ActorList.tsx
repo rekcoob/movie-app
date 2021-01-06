@@ -1,33 +1,23 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-// import { AppCtx } from '../context/AppCtx';
-// import { clearActor, getActors } from '../context/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { getActors } from '../store/actions';
-
 import { Spinner } from '../components/Spinner';
-import { IMG_API, NO_IMAGE } from '../globalVariables';
 import { Searchbox } from '../components/Searchbox';
+import { IMG_API, NO_IMAGE } from '../globalVariables';
+import { RootState } from '../store/types';
 
 export const ActorList: React.FC = () => {
-	// const {
-	// 	state: { loading, actors },
-	// 	dispatch,
-	// } = useContext(AppCtx);
-
 	const dispatch = useDispatch();
 
-	const actorList = useSelector((state: any) => state.actorList);
+	const actorList = useSelector((state: RootState) => state.actorList);
 	const { loading, actors } = actorList;
 
 	useEffect(() => {
-		// getActors(dispatch);
 		dispatch(getActors());
 	}, [dispatch]);
 
-	const handleClick = () => {
-		// clearActor(dispatch);
-	};
+	const handleClick = () => {};
 
 	return (
 		<>
@@ -35,7 +25,7 @@ export const ActorList: React.FC = () => {
 			<div className="container">
 				{loading || actors === null ? (
 					<Spinner />
-				) : actors.length !== 0 ? (
+				) : actors.length > 0 ? (
 					actors.map((actor: any) => (
 						<div className="card" key={actor.id}>
 							<Link onClick={handleClick} to={`/actor/${actor.id}`}>

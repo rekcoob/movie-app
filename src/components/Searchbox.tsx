@@ -11,18 +11,18 @@ type Props = {
 
 export const Searchbox: React.FC<Props> = (props) => {
 	const { dispatch } = useContext(AppCtx);
-	const [text, setText] = useState('');
+	const [query, setQuery] = useState('');
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		if (props.movies) {
-			searchMovies(dispatch, text);
+			searchMovies(dispatch, query);
 		} else if (props.serials) {
-			searchSerials(dispatch, text);
+			searchSerials(dispatch, query);
 		} else {
-			searchActors(dispatch, text);
+			searchActors(dispatch, query);
 		}
-		setText('');
+		setQuery('');
 	};
 
 	return (
@@ -37,8 +37,8 @@ export const Searchbox: React.FC<Props> = (props) => {
 							? 'Search serials...'
 							: 'Search actors...'
 					}
-					value={text}
-					onChange={(e) => setText(e.target.value)}
+					value={query}
+					onChange={(e) => setQuery(e.target.value)}
 				/>
 			</form>
 		</div>

@@ -1,30 +1,36 @@
 import { combineReducers } from 'redux';
 import {
+	ActorItemActionTypes,
+	ActorListActionTypes,
 	ACTORS_LOADING,
 	ACTOR_LOADING,
 	ADD_FAV,
-	CLEAR_MOVIE,
+	FavoriteListActionTypes,
+	FavoriteListState,
 	GET_ACTOR,
 	GET_ACTORS,
 	GET_MOVIE,
 	GET_MOVIES,
 	GET_SERIAL,
 	GET_SERIALS,
+	MovieItemActionTypes,
+	MovieListActionTypes,
 	MOVIES_LOADING,
 	MOVIE_LOADING,
 	REMOVE_FAV,
 	SEARCH_ACTORS,
 	SEARCH_MOVIES,
 	SEARCH_SERIALS,
+	SerialItemActionTypes,
+	SerialListActionTypes,
 	SERIALS_LOADING,
 	SERIAL_LOADING,
 } from './types';
 
-// import { moviesReducer } from './moviesReducer';
-// import { movieReducer } from './movieReducer';
-// import { favReducer } from './favReducer';
-
-const movieListReducer = (state = { movies: [] }, action: any) => {
+const movieListReducer = (
+	state = { movies: [] },
+	action: MovieListActionTypes
+) => {
 	switch (action.type) {
 		case MOVIES_LOADING:
 			return { loading: true, movies: null };
@@ -46,7 +52,10 @@ const movieListReducer = (state = { movies: [] }, action: any) => {
 	}
 };
 
-const serialListReducer = (state = { serials: [] }, action: any) => {
+const serialListReducer = (
+	state = { serials: [] },
+	action: SerialListActionTypes
+) => {
 	switch (action.type) {
 		case SERIALS_LOADING:
 			return { loading: true, serials: null };
@@ -68,7 +77,10 @@ const serialListReducer = (state = { serials: [] }, action: any) => {
 	}
 };
 
-const actorListReducer = (state = { actors: [] }, action: any) => {
+const actorListReducer = (
+	state = { actors: [] },
+	action: ActorListActionTypes
+) => {
 	switch (action.type) {
 		case ACTORS_LOADING:
 			return { loading: true, actors: null };
@@ -90,7 +102,10 @@ const actorListReducer = (state = { actors: [] }, action: any) => {
 	}
 };
 
-const movieItemReducer = (state = { movie: {} }, action: any) => {
+const movieItemReducer = (
+	state = { movie: {} },
+	action: MovieItemActionTypes
+) => {
 	switch (action.type) {
 		case MOVIE_LOADING:
 			return { ...state, loading: true };
@@ -100,19 +115,15 @@ const movieItemReducer = (state = { movie: {} }, action: any) => {
 				movie: action.payload,
 				loading: false,
 			};
-		case CLEAR_MOVIE: {
-			return {
-				...state,
-				movie: {} as any,
-				loading: false,
-			};
-		}
 		default:
 			return state;
 	}
 };
 
-const serialItemReducer = (state = { serial: {} }, action: any) => {
+const serialItemReducer = (
+	state = { serial: {} },
+	action: SerialItemActionTypes
+) => {
 	switch (action.type) {
 		case SERIAL_LOADING:
 			return { ...state, loading: true };
@@ -127,7 +138,10 @@ const serialItemReducer = (state = { serial: {} }, action: any) => {
 	}
 };
 
-const actorItemReducer = (state = { actor: {} }, action: any) => {
+const actorItemReducer = (
+	state = { actor: {} },
+	action: ActorItemActionTypes
+) => {
 	switch (action.type) {
 		case ACTOR_LOADING:
 			return { ...state, loading: true };
@@ -143,18 +157,19 @@ const actorItemReducer = (state = { actor: {} }, action: any) => {
 	}
 };
 
-const favoriteListReducer = (state = { favorites: [] }, action: any) => {
+const favoriteListReducer = (
+	state: FavoriteListState = { favorites: [] },
+	action: FavoriteListActionTypes
+) => {
 	switch (action.type) {
 		case ADD_FAV:
 			const item = action.payload;
-			// @ts-ignore
 			const existItem = state.favorites.find((x) => x.id === item.id);
 
 			if (existItem) {
 				return {
 					...state,
 					favorites: state.favorites.map((x) =>
-						// @ts-ignore
 						x.id === existItem.id ? item : x
 					),
 				};
@@ -167,7 +182,6 @@ const favoriteListReducer = (state = { favorites: [] }, action: any) => {
 		case REMOVE_FAV:
 			return {
 				...state,
-				// @ts-ignore
 				favorites: state.favorites.filter((x) => x.id !== action.payload),
 			};
 		default:
@@ -184,5 +198,3 @@ export const reducers = combineReducers({
 	actorItem: actorItemReducer,
 	favoriteList: favoriteListReducer,
 });
-
-export type RootState = ReturnType<typeof reducers>;

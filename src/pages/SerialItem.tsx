@@ -1,34 +1,17 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSerial } from '../store/actions';
-
 import Moment from 'react-moment';
-// import { AppCtx } from '../context/AppCtx';
-// import { getSerial } from '../context/actions';
 import { Spinner } from '../components/Spinner';
 import { IMG_API, NO_IMAGE } from '../globalVariables';
-import { IGenre } from '../context/types';
+import { RootState } from '../store/types';
 
 export const SerialItem: React.FC = () => {
 	const { id } = useParams<{ id: string }>();
-	// const {
-	// 	state: {
-	// 		loading,
-	// 		serial: {
-	// 			name,
-	// 			poster_path,
-	// 			first_air_date,
-	// 			vote_average,
-	// 			overview,
-	// 			genres,
-	// 		},
-	// 	},
-	// 	dispatch,
-	// } = useContext(AppCtx);
 	const dispatch = useDispatch();
 
-	const serialItem = useSelector((state: any) => state.serialItem);
+	const serialItem = useSelector((state: RootState) => state.serialItem);
 	const { loading, serial } = serialItem;
 	const {
 		name,
@@ -40,7 +23,6 @@ export const SerialItem: React.FC = () => {
 	} = serial;
 
 	useEffect(() => {
-		// getSerial(dispatch, +id);
 		dispatch(getSerial(+id));
 	}, [dispatch, id]);
 
@@ -58,7 +40,7 @@ export const SerialItem: React.FC = () => {
 					</span>
 					<div className="genres">
 						{genres &&
-							genres.map((genre: IGenre, id: number) => (
+							genres.map((genre, id) => (
 								<span key={genre.id}>{(id ? ', ' : '') + genre.name} </span>
 							))}
 					</div>

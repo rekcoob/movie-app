@@ -1,16 +1,16 @@
 import axios from 'axios';
-import { Dispatch } from 'react';
 import {
 	ACTORS_LOADING,
 	ACTOR_LOADING,
 	ADD_FAV,
-	CLEAR_MOVIE,
+	AppThunk,
 	GET_ACTOR,
 	GET_ACTORS,
 	GET_MOVIE,
 	GET_MOVIES,
 	GET_SERIAL,
 	GET_SERIALS,
+	IMovie,
 	MOVIES_LOADING,
 	MOVIE_LOADING,
 	REMOVE_FAV,
@@ -24,7 +24,7 @@ import {
 const API_KEY = process.env.REACT_APP_API_KEY;
 
 // Get Popular Movies
-export const getMovies = () => async (dispatch: any) => {
+export const getMovies = (): AppThunk => async (dispatch) => {
 	dispatch({ type: MOVIES_LOADING });
 
 	const res = await axios.get(
@@ -39,7 +39,7 @@ export const getMovies = () => async (dispatch: any) => {
 };
 
 // Search Movies
-export const searchMovies = (query: string) => async (dispatch: any) => {
+export const searchMovies = (query: string): AppThunk => async (dispatch) => {
 	dispatch({ type: MOVIES_LOADING });
 
 	const res = await axios.get(
@@ -52,7 +52,7 @@ export const searchMovies = (query: string) => async (dispatch: any) => {
 };
 
 // Get Single Movie
-export const getMovie = (id: number) => async (dispatch: any) => {
+export const getMovie = (id: number): AppThunk => async (dispatch) => {
 	dispatch({ type: MOVIE_LOADING });
 
 	const res = await axios.get(
@@ -65,7 +65,7 @@ export const getMovie = (id: number) => async (dispatch: any) => {
 };
 
 // Get Popular Serials
-export const getSerials = () => async (dispatch: any) => {
+export const getSerials = (): AppThunk => async (dispatch) => {
 	dispatch({ type: SERIALS_LOADING });
 
 	const res = await axios.get(
@@ -78,7 +78,7 @@ export const getSerials = () => async (dispatch: any) => {
 };
 
 // Search Serials
-export const searchSerials = (query: string) => async (dispatch: any) => {
+export const searchSerials = (query: string): AppThunk => async (dispatch) => {
 	dispatch({ type: SERIALS_LOADING });
 
 	const res = await axios.get(
@@ -91,7 +91,7 @@ export const searchSerials = (query: string) => async (dispatch: any) => {
 };
 
 // Get Single Serial
-export const getSerial = (id: number) => async (dispatch: any) => {
+export const getSerial = (id: number): AppThunk => async (dispatch) => {
 	dispatch({ type: SERIAL_LOADING });
 
 	const res = await axios.get(
@@ -104,7 +104,7 @@ export const getSerial = (id: number) => async (dispatch: any) => {
 };
 
 // Get Popular Actors
-export const getActors = () => async (dispatch: any) => {
+export const getActors = (): AppThunk => async (dispatch) => {
 	dispatch({ type: ACTORS_LOADING });
 
 	const res = await axios.get(
@@ -117,7 +117,7 @@ export const getActors = () => async (dispatch: any) => {
 };
 
 // Search Actors
-export const searchActors = (text: string) => async (dispatch: any) => {
+export const searchActors = (text: string): AppThunk => async (dispatch) => {
 	dispatch({ type: ACTORS_LOADING });
 
 	const res = await axios.get(
@@ -130,7 +130,7 @@ export const searchActors = (text: string) => async (dispatch: any) => {
 };
 
 // Get Single Actor
-export const getActor = (id: number) => async (dispatch: any) => {
+export const getActor = (id: number): AppThunk => async (dispatch) => {
 	dispatch({ type: ACTOR_LOADING });
 
 	const res = await axios.get(
@@ -142,23 +142,20 @@ export const getActor = (id: number) => async (dispatch: any) => {
 	});
 };
 
-export const addToFavs = (movie: any) => (
-	dispatch: Dispatch<any>,
-	getState: any
-) => {
+export const addToFavs = (movie: IMovie): AppThunk => (dispatch, getState) => {
 	dispatch({
 		type: ADD_FAV,
 		payload: movie,
 	});
 	localStorage.setItem(
 		'favoriteMovies',
-		JSON.stringify(getState().favs.favorites)
+		JSON.stringify(getState().favoriteList)
 	);
 };
 
-export const removeFromFavs = (id: string) => (
-	dispatch: Dispatch<any>,
-	getState: any
+export const removeFromFavs = (id: string): AppThunk => (
+	dispatch,
+	getState
 ) => {
 	dispatch({
 		type: REMOVE_FAV,
@@ -166,6 +163,6 @@ export const removeFromFavs = (id: string) => (
 	});
 	localStorage.setItem(
 		'favoriteMovies',
-		JSON.stringify(getState().favs.favorites)
+		JSON.stringify(getState().favoriteList)
 	);
 };

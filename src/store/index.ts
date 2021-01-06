@@ -1,14 +1,14 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
-// import { rootReducer } from './reducers/rootReducer';
 import { reducers } from './reducers';
+import { IMovie } from './types';
 
-const favorites = localStorage.getItem('favoriteMovies')
+const favorites: IMovie[] = localStorage.getItem('favoriteMovies')
 	? JSON.parse(localStorage.getItem('favoriteMovies')!)
 	: [];
 
-const initialState: any = {
+const initialState = {
 	favoriteList: { favorites },
 };
 

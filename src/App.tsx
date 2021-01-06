@@ -6,7 +6,7 @@ import { SerialList } from './pages/SerialList';
 import { ActorList } from './pages/ActorList';
 import { MovieItem } from './pages/MovieItem';
 import { SerialItem } from './pages/SerialItem';
-import { Actor } from './pages/Actor';
+import { ActorItem } from './pages/ActorItem';
 import { NotFoundPage } from './pages/NotFoundPage';
 
 const App = () => {
@@ -35,7 +35,7 @@ const App = () => {
 				</Route>
 
 				<Route path="/actor/:id">
-					<Actor />
+					<ActorItem />
 				</Route>
 
 				<Route>
