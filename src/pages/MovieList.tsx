@@ -1,24 +1,35 @@
 import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
-import { AppCtx } from '../context/AppCtx';
-import { clearMovie, getMovies } from '../context/actions';
+// import { AppCtx } from '../context/AppCtx';
+// import { clearMovie, getMovies } from '../context/actions';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { getMovies } from '../store/actions';
+
 import { Spinner } from '../components/Spinner';
 import { IMG_API, NO_IMAGE } from '../globalVariables';
 import { Searchbox } from '../components/Searchbox';
 
-export const Movies: React.FC = () => {
-	const {
-		state: { loading, movies },
-		dispatch,
-	} = useContext(AppCtx);
+export const MovieList: React.FC = () => {
+	// const {
+	// 	state: { loading, movies },
+	// 	dispatch,
+	// } = useContext(AppCtx);
+
+	const dispatch = useDispatch();
+
+	const movieList = useSelector((state: any) => state.movieList);
+	const { loading, movies } = movieList;
 
 	useEffect(() => {
-		getMovies(dispatch);
+		// getMovies(dispatch);
+		dispatch(getMovies());
 	}, [dispatch]);
 
 	const handleClick = () => {
-		clearMovie(dispatch);
+		// clearMovie(dispatch);
+		console.log('click');
 	};
 
 	return (
@@ -28,7 +39,7 @@ export const Movies: React.FC = () => {
 				{loading || movies === null ? (
 					<Spinner />
 				) : movies.length !== 0 ? (
-					movies.map((movie) => (
+					movies.map((movie: any) => (
 						<div className="card" key={movie.id}>
 							<Link onClick={handleClick} to={`/movie/${movie.id}`}>
 								<img
@@ -39,7 +50,7 @@ export const Movies: React.FC = () => {
 								/>
 								<h3>{movie.title}</h3>
 								<p>
-									<span>{movie.vote_average * 10}% |</span>
+									<span>{movie.vote_average * 10}% | </span>
 									<span>
 										<Moment format="MMM D, YYYY">{movie.release_date}</Moment>
 									</span>

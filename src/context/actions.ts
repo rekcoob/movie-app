@@ -11,6 +11,8 @@ const getMovies = async (dispatch: Dispatch<ActionType>) => {
 	const res = await axios.get(
 		`https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=${API_KEY}&page=1`
 	);
+	console.log(res.data);
+
 	dispatch({
 		type: ACTIONS.GET_MOVIES,
 		payload: res.data.results,
@@ -119,6 +121,32 @@ const searchActors = async (dispatch: Dispatch<ActionType>, text: string) => {
 		type: ACTIONS.SEARCH_ACTORS,
 		payload: res.data.results,
 	});
+};
+
+// Add Movie To Favorites
+export const addToFavorites = (movie: any): any => (
+	dispatch: any,
+	getState: any
+) => {
+	console.log('action');
+
+	dispatch({
+		type: ACTIONS.ADD_FAV,
+		payload: movie,
+	});
+	localStorage.setItem('favoriteMovies', JSON.stringify(getState().favorites));
+};
+
+// Remove Movie From Favorites
+export const removeFromFavorites = (id: string): any => (
+	dispatch: any,
+	getState: any
+) => {
+	dispatch({
+		type: ACTIONS.REMOVE_FAV,
+		payload: id,
+	});
+	localStorage.setItem('favoriteMovies', JSON.stringify(getState().favorites));
 };
 
 // Clear Movie From State

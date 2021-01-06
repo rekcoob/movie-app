@@ -48,6 +48,7 @@ export type StateType = {
 	actors: IActor[] | null;
 	actor: IActor | any;
 	loading: boolean;
+	favorites: any[];
 };
 
 export type ActionType =
@@ -63,7 +64,9 @@ export type ActionType =
 	| { type: 'SEARCH_MOVIES'; payload: IMovie[] }
 	| { type: 'SEARCH_ACTORS'; payload: IActor[] }
 	| { type: 'SEARCH_SERIALS'; payload: ISerial[] }
-	| { type: 'SET_LOADING' };
+	| { type: 'SET_LOADING' }
+	| { type: 'ADD_FAV'; payload: any }
+	| { type: 'REMOVE_FAV'; payload: any };
 
 export enum ACTIONS {
 	GET_MOVIES = 'GET_MOVIES',
@@ -79,4 +82,6 @@ export enum ACTIONS {
 	GET_ACTOR = 'GET_ACTOR',
 	GET_ACTORS = 'GET_ACTORS',
 	SET_LOADING = 'SET_LOADING',
+	ADD_FAV = 'ADD_FAV',
+	REMOVE_FAV = 'REMOVE_FAV',
 }

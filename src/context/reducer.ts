@@ -7,7 +7,7 @@ import {
 	IActor,
 } from './types';
 
-export const reducer = (state: StateType, action: ActionType) => {
+export const reducer = (state: StateType, action: any) => {
 	switch (action.type) {
 		case ACTIONS.GET_MOVIES:
 			return {
@@ -91,6 +91,28 @@ export const reducer = (state: StateType, action: ActionType) => {
 			return {
 				...state,
 				loading: true,
+			};
+		case ACTIONS.ADD_FAV:
+			const item = action.payload;
+			const existItem = state.favorites.find((x) => x.id === item.id);
+
+			if (existItem) {
+				return {
+					...state,
+					favorites: state.favorites.map((x) =>
+						x.id === existItem.id ? item : x
+					),
+				};
+			} else {
+				return {
+					...state,
+					favorites: [...state.favorites, item],
+				};
+			}
+		case ACTIONS.REMOVE_FAV:
+			return {
+				...state,
+				favorites: state.favorites.filter((x) => x.id !== action.payload),
 			};
 		default:
 			return state;

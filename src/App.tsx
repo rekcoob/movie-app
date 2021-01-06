@@ -1,11 +1,11 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
-import { Movies } from './pages/Movies';
-import { Serials } from './pages/Serials';
-import { Actors } from './pages/Actors';
-import { Movie } from './pages/Movie';
-import { Serial } from './pages/Serial';
+import { MovieList } from './pages/MovieList';
+import { SerialList } from './pages/SerialList';
+import { ActorList } from './pages/ActorList';
+import { MovieItem } from './pages/MovieItem';
+import { SerialItem } from './pages/SerialItem';
 import { Actor } from './pages/Actor';
 import { NotFoundPage } from './pages/NotFoundPage';
 
@@ -15,23 +15,23 @@ const App = () => {
 			<Navbar />
 			<Switch>
 				<Route exact path="/">
-					<Movies />
+					<MovieList />
 				</Route>
 
 				<Route path="/serials">
-					<Serials />
+					<SerialList />
 				</Route>
 
 				<Route path="/actors">
-					<Actors />
+					<ActorList />
 				</Route>
 
 				<Route path="/movie/:id">
-					<Movie />
+					<MovieItem />
 				</Route>
 
 				<Route path="/serial/:id">
-					<Serial />
+					<SerialItem />
 				</Route>
 
 				<Route path="/actor/:id">
