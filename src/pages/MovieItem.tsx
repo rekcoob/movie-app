@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getMovie } from '../store/actions';
+import { addToFavs, getMovie, removeFromFavs } from '../store/actions';
 import Moment from 'react-moment';
 import { Spinner } from '../components/Spinner';
 import { IMG_API, NO_IMAGE } from '../globalVariables';
@@ -22,18 +22,12 @@ export const MovieItem: React.FC = () => {
 		genres,
 	} = movie;
 
+	const favoriteList = useSelector((state: RootState) => state.favoriteList);
+	const { favorites } = favoriteList;
+
 	useEffect(() => {
 		dispatch(getMovie(+id));
 	}, [dispatch, id]);
-
-	const addFav = (movie: any) => {
-		// dispatch(addToFavorites(movie));
-		console.log('add to favs');
-	};
-	const removeFav = (id: any) => {
-		// dispatch(removeFromFavorites(id));
-		console.log('remove from favs');
-	};
 
 	if (loading) return <Spinner />;
 	return (
@@ -44,28 +38,27 @@ export const MovieItem: React.FC = () => {
 					<h2>
 						{title}{' '}
 						<span>
-							{/* {favorites && favorites.find((fav: any) => fav.id === id) ? (
-								<button
-									onClick={() => removeFav(id)}
+							{favorites && favorites.find((fav) => fav.id === +id) ? (
+								<i
+									className="fas fa-heart"
+									onClick={() => dispatch(removeFromFavs(+id))}
 									style={{
+										color: '#EE515E',
 										fontSize: '2.1rem',
 										cursor: 'pointer',
 									}}
-								>
-									<i className="far fa-heart"></i>
-								</button>
+								></i>
 							) : (
-								<button
-									onClick={() => addFav(movie)}
+								<i
+									className="far fa-heart"
+									onClick={() => dispatch(addToFavs(movie))}
 									style={{
 										fontSize: '2.1rem',
 										cursor: 'pointer',
 									}}
-								>
-									<i className="fas fa-heart"></i>
-								</button>
-							)} */}
-							<button
+								></i>
+							)}
+							{/* <button
 								onClick={() => removeFav(id)}
 								style={{
 									fontSize: '2.1rem',
@@ -82,7 +75,7 @@ export const MovieItem: React.FC = () => {
 								}}
 							>
 								<i className="fas fa-heart"></i>
-							</button>
+							</button> */}
 						</span>
 					</h2>
 

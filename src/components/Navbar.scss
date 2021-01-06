@@ -44,9 +44,10 @@ nav {
 
 @media (max-width: 576px) {
 	nav {
-		height: 11rem;
+		height: 13rem;
 		ul {
 			flex-direction: column;
+			align-items: center;
 		}
 	}
 }

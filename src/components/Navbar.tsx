@@ -24,6 +24,9 @@ export const Navbar: React.FC<Props> = ({
 						<Link to="/">Movies</Link>
 					</li>
 					<li>
+						<Link to="/favorites">Favorites</Link>
+					</li>
+					<li>
 						<Link to="/serials">Serials</Link>
 					</li>
 					<li>

@@ -1,7 +1,7 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import './Searchbox.scss';
-import { AppCtx } from '../context/AppCtx';
-import { searchActors, searchMovies, searchSerials } from '../context/actions';
+import { useDispatch } from 'react-redux';
+import { searchActors, searchMovies, searchSerials } from '../store/actions';
 
 type Props = {
 	movies?: boolean;
@@ -10,17 +10,17 @@ type Props = {
 };
 
 export const Searchbox: React.FC<Props> = (props) => {
-	const { dispatch } = useContext(AppCtx);
 	const [query, setQuery] = useState('');
+	const dispatch = useDispatch();
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		if (props.movies) {
-			searchMovies(dispatch, query);
+			dispatch(searchMovies(query));
 		} else if (props.serials) {
-			searchSerials(dispatch, query);
+			dispatch(searchSerials(query));
 		} else {
-			searchActors(dispatch, query);
+			dispatch(searchActors(query));
 		}
 		setQuery('');
 	};

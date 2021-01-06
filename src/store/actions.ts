@@ -142,18 +142,28 @@ export const getActor = (id: number): AppThunk => async (dispatch) => {
 	});
 };
 
+// Add Movie To Favorites
 export const addToFavs = (movie: IMovie): AppThunk => (dispatch, getState) => {
 	dispatch({
 		type: ADD_FAV,
-		payload: movie,
+		payload: {
+			id: movie.id,
+			title: movie.title,
+			overview: movie.overview,
+			poster_path: movie.poster_path,
+			release_date: movie.release_date,
+			vote_average: movie.vote_average,
+			genres: movie.genres,
+		},
 	});
 	localStorage.setItem(
 		'favoriteMovies',
-		JSON.stringify(getState().favoriteList)
+		JSON.stringify(getState().favoriteList.favorites)
 	);
 };
 
-export const removeFromFavs = (id: string): AppThunk => (
+// Remove Movie From Favorites
+export const removeFromFavs = (id: number): AppThunk => (
 	dispatch,
 	getState
 ) => {
@@ -163,6 +173,6 @@ export const removeFromFavs = (id: string): AppThunk => (
 	});
 	localStorage.setItem(
 		'favoriteMovies',
-		JSON.stringify(getState().favoriteList)
+		JSON.stringify(getState().favoriteList.favorites)
 	);
 };
