@@ -1,16 +1,12 @@
 .search-box {
-	margin: 2rem 0 1rem;
-	padding: 0 5rem;
+	padding: 1.5rem 0 0.75rem;
 	input[type='text'] {
 		font-family: inherit;
 		font-size: 1.2rem;
-		width: 80%;
-		max-width: 1280px;
-		display: block;
-		margin: auto;
+		width: 100%;
 		padding: 0.5rem 1.5rem;
 		background-color: #2d3748;
-		color: white;
+		color: inherit;
 		border: 1px solid #1a202c;
 		border-radius: 50px;
 		&:focus {
@@ -24,8 +20,8 @@
 	}
 }
 
-@media (max-width: 1280px) {
+@media (max-width: 1024px) {
 	.search-box {
-		padding: 0;
+		padding: 1.5rem 3rem 0.75rem;
 	}
 }

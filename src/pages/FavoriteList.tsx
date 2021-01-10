@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getMovies } from '../store/actions';
+import { getMovies } from '../store/actions/movieActions';
 import Moment from 'react-moment';
 import { IMG_API, NO_IMAGE } from '../globalVariables';
-import { RootState } from '../store/types';
+import { RootState } from '../store/types/rootTypes';
 
 export const FavoriteList: React.FC = () => {
 	const dispatch = useDispatch();
@@ -18,9 +18,9 @@ export const FavoriteList: React.FC = () => {
 
 	return (
 		<>
-			<div className="container">
-				{favorites.length > 0 ? (
-					favorites.map((movie) => (
+			{favorites.length > 0 ? (
+				<div className="list-container">
+					{favorites.map((movie) => (
 						<div className="card" key={movie.id}>
 							<Link to={`/movie/${movie.id}`}>
 								<img
@@ -38,11 +38,11 @@ export const FavoriteList: React.FC = () => {
 								</p>
 							</Link>
 						</div>
-					))
-				) : (
-					<h2 className="py-2">No Movies Found</h2>
-				)}
-			</div>
+					))}
+				</div>
+			) : (
+				<h2 className="py-2 text-center">No Movies Found</h2>
+			)}
 		</>
 	);
 };

@@ -1,12 +1,19 @@
-# Movie App
+# React Movie Application
 
-> React app using [TMDB_api](https://www.themoviedb.org/documentation/api) to show popular Movies, Serials and Actors.
+> Movie app using [TMDB_api](https://www.themoviedb.org/documentation/api), built with React,Redux & Typescript.
 
-> with Typescript, Context Api & Hooks
+## [Live Demo](https://rekcoob-movies.netlify.app)
 
-## MovieDB API connection setup
+## Features
 
-Add your MovieDB Api Key to .env.local/ REACT_APP_API_KEY
+- Get popular movies, TV shows & actors
+- Save favorite movies to local storage
+- Infinite scroll
+- Fully responsive
+
+## TMDb API connection setup
+
+Add your TMDb API Key to .env.local/ REACT_APP_API_KEY
 
 ## Quick Start
 

@@ -8,7 +8,7 @@ type Props = {
 };
 
 export const Navbar: React.FC<Props> = ({
-	title = 'Movie App',
+	title = 'MovieApp',
 	icon = 'fas fa-video',
 }) => {
 	return (
@@ -27,7 +27,7 @@ export const Navbar: React.FC<Props> = ({
 						<Link to="/favorites">Favorites</Link>
 					</li>
 					<li>
-						<Link to="/serials">Serials</Link>
+						<Link to="/serials">TV Shows</Link>
 					</li>
 					<li>
 						<Link to="/actors">Actors</Link>

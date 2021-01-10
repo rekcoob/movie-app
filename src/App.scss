@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+body {
+	font-family: 'Poppins', Arial, sans-serif;
+	background: #1a202c;
+	color: white;
+}
+a {
+	color: inherit;
+	text-decoration: none;
+}
+ul {
+	list-style: none;
+}
+
+// Container
+.container {
+	max-width: 1024px;
+	margin: auto;
+}
+
+.list-container {
+	display: grid;
+	justify-items: center;
+	grid-template-columns: repeat(4, 1fr);
+}
+
+// Card | List Item
+.card {
+	margin: 1rem;
+	img {
+		// object-fit: cover;
+		max-width: 100%;
+	}
+	h3 {
+		font-weight: 400;
+	}
+	&:hover {
+		opacity: 0.75;
+	}
+	p {
+		font-weight: 200;
+	}
+}
+
+// Movie | Serial | Actor Details Page
+.details {
+	position: relative;
+	display: flex;
+	// border-bottom: 1px solid #718096;
+	img {
+		width: 35%;
+		padding: 4rem 1rem;
+	}
+	.desc {
+		margin: 3rem 2rem 2rem;
+		h2 {
+			margin: 1rem 0;
+			font-size: 2.1rem;
+			font-weight: 500;
+		}
+		span {
+			font-weight: 200;
+			font-size: 1.1rem;
+		}
+		p {
+			position: absolute;
+			margin: 1rem 0;
+			font-weight: 200;
+			font-size: 1.2rem;
+		}
+	}
+}
+
+// Responsive media queries
+@media (max-width: 1024px) {
+	.list-container {
+		margin: 0 3rem;
+		grid-template-columns: repeat(3, 1fr);
+	}
+	.details {
+		img {
+			width: 40%;
+		}
+		margin: 0 1.5rem;
+		.desc {
+			margin: 3rem 2rem 2rem;
+			h2 {
+				font-size: 2rem;
+			}
+			p {
+				font-size: 1.1rem;
+			}
+		}
+	}
+}
+
+@media (max-width: 768px) {
+	.list-container {
+		grid-template-columns: repeat(2, 1fr);
+	}
+	.details {
+		img {
+			width: 50%;
+			padding: 4rem 1rem 0;
+		}
+		flex-direction: column;
+		align-items: center;
+		.desc {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			.genres {
+				text-align: center;
+			}
+			p {
+				position: static;
+				text-align: center;
+			}
+		}
+	}
+}
+
+@media (max-width: 576px) {
+	.list-container {
+		padding: 1rem 2rem;
+		grid-template-columns: 1fr;
+		text-align: center;
+	}
+	.details {
+		img {
+			width: 80%;
+		}
+	}
+}
