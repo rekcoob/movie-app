@@ -1,36 +1,63 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎬 Next.js Movie Application 🍿
 
-## Getting Started
+> A dynamic movie app built with [Next.js](https://nextjs.org/), TypeScript, and the [TMDB API](https://www.themoviedb.org/documentation/api) to fetch the latest movies, TV shows, and actors.
 
-First, run the development server:
+## 🚀 [Live Demo](https://rekcoob-movies.netlify.app)
+
+## ✨ Features
+
+- 🔥 Discover popular movies, TV shows, and actors
+- ❤️ Save favorite movies to local storage
+- 🔄 Infinite scroll for seamless browsing
+- 📱 Fully responsive design
+
+## 🛠️ TMDb API Setup
+
+To connect the app to the TMDb API:
+
+1. Create a `.env` file in the root directory.
+2. Add your TMDb API key like this:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+NEXT_PUBLIC_TMDB_API_KEY=your_api_key_here
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ⚡ Quick Start
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Follow these commands to run and build the project:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+# Install Dependencies
+npm install
 
-## Learn More
+# Run Development Server
+npm dev
 
-To learn more about Next.js, take a look at the following resources:
+# Build for Production
+npm build
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Start Production Server
+npm start
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📂 Project Structure
 
-## Deploy on Vercel
+- **`/components`** – Reusable components such as `Navbar`, `MovieCards`, etc.
+- **`/pages`** – Next.js pages for routes like Home, Movie Details, and Search.
+- **`/public`** – Static assets (including the 🍿 favicon).
+- **`/styles`** – Global and component-specific SCSS styles.
+- **`/utils`** – Utility functions and API service calls.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📝 Notes
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Built with 💙 using Next.js, TypeScript, and SCSS for modular styling.
+- Uses local storage to keep favorite movies across sessions.
+- Infinite scrolling is powered by TMDb’s pagination.
+
+## 🤝 Contributing
+
+If you’d like to contribute, feel free to open issues or submit pull requests. All contributions are welcome!
+
+---
+
+Built with 🎥 & 🍿 by [b0ock3r](https://rekcoob.github.io)
