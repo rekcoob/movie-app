@@ -1,7 +1,5 @@
-// app/actor/[id]/page.tsx
-
 import React from 'react'
-import DetailsItem from '../../components/DetailsItem'
+import DetailsItem from '@/app/components/DetailsItem'
 import { fetchActorById } from '@/app/services/api'
 
 interface Actor {
@@ -12,15 +10,14 @@ interface Actor {
   place_of_birth: string | null
   biography: string
 }
+// interface Params {
+//   id: string
+// }
 
-interface ActorPageProps {
-  params: { id: string }
-}
+const ActorItem = async ({ params }: { params: Promise<{ id: string }> }) => {
+  const { id } = await params
 
-const ActorItem: React.FC<ActorPageProps> = async ({ params }) => {
-  const { id } = params
-
-  const actor: Actor = await fetchActorById(Number(id))
+  const actor: Actor = await fetchActorById(Number(id)) // Convert id to number
   const { name, profile_path, birthday, place_of_birth, biography } = actor
 
   return (
@@ -36,7 +33,7 @@ const ActorItem: React.FC<ActorPageProps> = async ({ params }) => {
               day: 'numeric',
               year: 'numeric',
             }).format(new Date(birthday))}{' '}
-            | {<span>{place_of_birth}</span>}
+            | {place_of_birth && <span>{place_of_birth}</span>}
           </span>
         )
       }

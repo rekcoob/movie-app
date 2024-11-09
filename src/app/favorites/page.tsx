@@ -1,59 +1,44 @@
-// app/favoriteList/page.tsx
+// src/app/favorites/page.tsx
+'use client'
 
-import React from 'react'
-import Link from 'next/link'
+import React, { useEffect, useState } from 'react'
+import { Movie } from '../types'
+import CardItem from '../components/CardItem'
 
-// const IMG_API = 'https://image.tmdb.org/t/p/w500'
-// const NO_IMAGE = '/path/to/default-image.jpg' // Nahraďte cestou k predvolenému obrázku
+const FavoritesPage: React.FC = () => {
+  const [favorites, setFavorites] = useState<Movie[]>([])
 
-interface Movie {
-  id: number
-  title: string
-  poster_path: string | null
-  vote_average: number
-  release_date: string
-}
+  useEffect(() => {
+    const savedFavorites = JSON.parse(localStorage.getItem('favorites') || '[]')
+    setFavorites(savedFavorites)
+  }, [])
 
-interface FavoriteListProps {
-  favorites?: Movie[] // Definujeme ako nepovinný prop
-}
-
-const FavoriteListPage: React.FC<FavoriteListProps> = ({ favorites = [] }) => {
   return (
-    <div>
+    <div className='list-container'>
+      <h1>Favorites</h1>
       {favorites.length > 0 ? (
-        <div className='list-container'>
-          {favorites.map((movie) => (
-            <div className='card' key={movie.id}>
-              <Link href={`/movie/${movie.id}`}>
-                <div>
-                  {/* <img
-                    src={
-                      movie.poster_path ? IMG_API + movie.poster_path : NO_IMAGE
-                    }
-                    alt={movie.title}
-                  /> */}
-                  <h3>{movie.title}</h3>
-                  <p>
-                    <span>{movie.vote_average * 10}% | </span>
-                    <span>
-                      {new Intl.DateTimeFormat('en-US', {
-                        month: 'short',
-                        day: 'numeric',
-                        year: 'numeric',
-                      }).format(new Date(movie.release_date))}
-                    </span>
-                  </p>
-                </div>
-              </Link>
-            </div>
-          ))}
-        </div>
+        favorites.map((movie) => (
+          <CardItem
+            key={movie.id}
+            id={movie.id}
+            title={movie.title}
+            imagePath={movie.poster_path}
+            linkPath={`/movies/${movie.id}`}
+            subtitle={`${movie.vote_average * 10}% | ${new Intl.DateTimeFormat(
+              'en-US',
+              {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric',
+              }
+            ).format(new Date(movie.release_date))}`}
+          />
+        ))
       ) : (
-        <h2 className='py-2 text-center'>No Movies Found</h2>
+        <p>No favorites added yet.</p>
       )}
     </div>
   )
 }
 
-export default FavoriteListPage
+export default FavoritesPage

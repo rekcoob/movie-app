@@ -1,5 +1,5 @@
 import React from 'react'
-import DetailsItem from '../../components/DetailsItem'
+import DetailsItem from '@/app//components/DetailsItem'
 import { fetchSeriesById } from '@/app/services/api'
 
 interface Genre {
@@ -17,13 +17,13 @@ interface Series {
   genres: Genre[]
 }
 
-interface SeriesPageProps {
-  params: { id: string }
-}
-
 /* SeriesDetails */
-const SeriesDetails: React.FC<SeriesPageProps> = async ({ params }) => {
-  const { id } = params
+const SeriesDetails = async ({
+  params,
+}: {
+  params: Promise<{ id: string }>
+}) => {
+  const { id } = await params
   const series: Series = await fetchSeriesById(Number(id))
 
   return (

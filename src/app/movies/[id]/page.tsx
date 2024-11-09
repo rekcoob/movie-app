@@ -14,17 +14,17 @@ interface Movie {
   genres: Genre[]
 }
 
-interface MoviePageProps {
-  params: { id: string }
-}
-
 interface Genre {
   id: number
   name: string
 }
 
-const MovieItemPage: React.FC<MoviePageProps> = async ({ params }) => {
-  const { id } = params
+const MovieItemPage = async ({
+  params,
+}: {
+  params: Promise<{ id: string }>
+}) => {
+  const { id } = await params
   const movie: Movie = await fetchMovieById(Number(id))
 
   return (
