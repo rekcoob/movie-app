@@ -1,29 +1,48 @@
-// app/page.tsx
+// src/app/favorites/page.tsx
+'use client'
 
-import React from 'react'
-import { fetchNowPlayingMovies, IMG_API } from '../../services/api'
-import { Movie } from '../../types'
+import React, { useEffect, useState } from 'react'
 import CardItem from '../../components/CardItem'
 
-const HomePage = async () => {
-  const data = await fetchNowPlayingMovies()
-  const movies: Movie[] = data.results
+interface Fav {
+  id: number
+  title: string
+  poster_path: string
+  imagePath: string
+  vote_average: number
+  release_date: string
+  overview: string
+  // genres?: Genre[]
+}
+
+const FavoritesPage: React.FC = () => {
+  const [favorites, setFavorites] = useState<Fav[]>([])
+
+  useEffect(() => {
+    const savedFavorites = JSON.parse(localStorage.getItem('favorites') || '[]')
+    console.log(savedFavorites)
+    setFavorites(savedFavorites)
+  }, [])
 
   return (
     <div className='list-container'>
-      {movies.map((movie) => (
-        <CardItem
-          key={movie.id}
-          id={movie.id}
-          title={movie.title}
-          imagePath={IMG_API + movie.poster_path}
-          linkPath={`/movies/${movie.id}`}
-          voteAverage={movie.vote_average}
-          date={movie.release_date}
-        />
-      ))}
+      {favorites.length > 0 ? (
+        favorites.map((fav) => (
+          <CardItem
+            key={fav.id}
+            id={fav.id}
+            title={fav.title}
+            imagePath={fav.imagePath}
+            linkPath={`/movies/${fav.id}`}
+            voteAverage={fav.vote_average}
+            date={fav.release_date}
+          />
+        ))
+      ) : (
+        <p>No favorites added yet.</p>
+      )}
     </div>
   )
 }
 
-export default HomePage
+export default FavoritesPage

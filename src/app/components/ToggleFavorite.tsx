@@ -21,7 +21,6 @@ const ToggleFavorite: React.FC<ToggleFavoriteProps> = ({ movie }) => {
   const [isFav, setIsFav] = useState(false)
 
   useEffect(() => {
-    // Check if the movie is already in favorites based on local storage
     const favoriteMovies = JSON.parse(localStorage.getItem('favorites') || '[]')
     const isMovieFavorite = favoriteMovies.some(
       (fav: Movie) => fav.id === movie.id

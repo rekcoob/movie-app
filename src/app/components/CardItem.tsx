@@ -3,6 +3,7 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { formatVoteAverage, formatDate } from '../services/utils'
 
 const IMG_API = 'https://image.tmdb.org/t/p/w500'
 const NO_IMAGE = '/path/to/placeholder.jpg'
@@ -16,17 +17,6 @@ interface CardItemProps {
   voteAverage?: number
   date?: string | null
 }
-
-const formatVoteAverage = (vote: number): string => `${(vote * 10).toFixed(2)}%`
-
-const formatDate = (dateString: string): string =>
-  new Intl.DateTimeFormat('en-GB', {
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric',
-  })
-    .format(new Date(dateString))
-    .replace(',', '')
 
 const CardItem: React.FC<CardItemProps> = ({
   id,

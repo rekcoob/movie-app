@@ -3,6 +3,7 @@
 import React from 'react'
 import Image from 'next/image'
 import ToggleFavorite from './ToggleFavorite'
+import { formatVoteAverage, formatDate } from '../services/utils'
 
 interface DetailsItemProps {
   id: number
@@ -11,6 +12,8 @@ interface DetailsItemProps {
   description: string
   subtitle?: string
   additionalInfo?: React.ReactNode // For genres or custom info
+  voteAverage?: number
+  date?: string | null
 }
 
 const IMG_API = 'https://image.tmdb.org/t/p/w500'
@@ -38,8 +41,18 @@ const DetailsItem: React.FC<DetailsItemProps> = (props) => {
       />
       <div className='desc'>
         <h2>{props.title}</h2>
-        <ToggleFavorite movie={movie} />{' '}
-        {props.subtitle && <p>{props.subtitle}</p>}
+        <ToggleFavorite movie={movie} />
+
+        {/* {props.subtitle && <p>{props.subtitle}</p>} */}
+
+        {/* Display voteAverage and date if available */}
+        {(props.voteAverage || props.date) && (
+          <p>
+            {props.voteAverage && formatVoteAverage(props.voteAverage)}
+            {props.date && <span> | {formatDate(props.date)}</span>}
+          </p>
+        )}
+
         {props.additionalInfo && (
           <div className='additional-info'>{props.additionalInfo}</div>
         )}

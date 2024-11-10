@@ -8,7 +8,7 @@ import { usePathname } from 'next/navigation'
 
 const navLinks = [
   { label: 'Popular', href: '/movies/popular' },
-  { label: 'Now Playing', href: '/movies/now-playing' },
+  // { label: 'Now Playing', href: '/movies/now-playing' },
   { label: 'Upcoming', href: '/movies/upcoming' },
   { label: 'Top Rated', href: '/movies/top-rated' },
   { label: 'Favorites', href: '/movies/favorites' },

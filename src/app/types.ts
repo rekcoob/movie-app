@@ -22,6 +22,7 @@ export interface Series {
   vote_average: number
   first_air_date: string
   genres?: Genre[]
+  overview: string
 }
 
 export interface Actor {
