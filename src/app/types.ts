@@ -11,6 +11,7 @@ export interface Movie {
   poster_path: string
   vote_average: number
   release_date: string
+  overview: string
   genres?: Genre[] // Optional genres if you decide to include them later
 }
 
@@ -28,5 +29,6 @@ export interface Actor {
   name: string
   profile_path: string | null
   birthday: string | null
-  place_of_birth: string | null
+  place_of_birth: string
+  popularity: string
 }

@@ -18,38 +18,6 @@ const ActorListPage = async () => {
           title={actor.name}
           imagePath={actor.profile_path}
           linkPath={`/actors/${actor.id}`}
-          subtitle={
-            actor.birthday
-              ? new Intl.DateTimeFormat('en-US', {
-                  month: 'short',
-                  day: 'numeric',
-                  year: 'numeric',
-                }).format(new Date(actor.birthday))
-              : 'Unknown'
-          }
-          // subtitle={
-          //   actor.birthday && (
-          //     <span>
-          //       {new Intl.DateTimeFormat('en-US', {
-          //         month: 'long',
-          //         day: 'numeric',
-          //         year: 'numeric',
-          //       }).format(new Date(actor.birthday))}{' '}
-          //       | {<span>{actor.place_of_birth}</span>}
-          //     </span>
-          //   )
-          // }
-
-          // subtitle={
-          //   // actor.birthday
-          //   //   ? new Intl.DateTimeFormat('en-US', {
-          //   //       month: 'short',
-          //   //       day: 'numeric',
-          //   //       year: 'numeric',
-          //   //     }).format(new Date(actor.birthday))
-          //   //   : 'Unknown'
-          //   'test'
-          // }
         />
       ))}
     </div>

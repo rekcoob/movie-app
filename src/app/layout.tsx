@@ -3,6 +3,7 @@ import localFont from 'next/font/local'
 import './globals.scss'
 import Head from 'next/head'
 import { Navbar } from './components/Navbar'
+import { FavoritesProvider } from './context/FavoritesContext'
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -32,8 +33,10 @@ export default function RootLayout({
       </Head>
 
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <Navbar />
-        <div className='container'>{children}</div>
+        <FavoritesProvider>
+          <Navbar />
+          <div className='container'>{children}</div>
+        </FavoritesProvider>
       </body>
     </html>
   )

@@ -2,8 +2,10 @@
 
 import React from 'react'
 import Image from 'next/image'
+import ToggleFavorite from './ToggleFavorite'
 
 interface DetailsItemProps {
+  id: number
   title: string
   imagePath: string | null
   description: string
@@ -14,30 +16,34 @@ interface DetailsItemProps {
 const IMG_API = 'https://image.tmdb.org/t/p/w500'
 const NO_IMAGE = '/path/to/placeholder.jpg'
 
-const DetailsItem: React.FC<DetailsItemProps> = ({
-  title,
-  imagePath,
-  description,
-  subtitle,
-  additionalInfo,
-}) => {
+const DetailsItem: React.FC<DetailsItemProps> = (props) => {
+  const movie = {
+    id: props.id,
+    title: props.title,
+    imagePath: props.imagePath,
+    description: props.description,
+    subtitle: props.subtitle,
+    additionalInfo: props.additionalInfo,
+  }
+
   return (
     <div className='details'>
       <Image
-        src={imagePath ? IMG_API + imagePath : NO_IMAGE}
-        alt={title}
+        src={props.imagePath ? IMG_API + props.imagePath : NO_IMAGE}
+        alt={props.title}
         width={500}
         height={750}
         placeholder='blur'
         blurDataURL={NO_IMAGE}
       />
       <div className='desc'>
-        <h2>{title}</h2>
-        {subtitle && <p>{subtitle}</p>}
-        {additionalInfo && (
-          <div className='additional-info'>{additionalInfo}</div>
+        <h2>{props.title}</h2>
+        <ToggleFavorite movie={movie} />{' '}
+        {props.subtitle && <p>{props.subtitle}</p>}
+        {props.additionalInfo && (
+          <div className='additional-info'>{props.additionalInfo}</div>
         )}
-        <p>{description}</p>
+        <p>{props.description}</p>
       </div>
     </div>
   )

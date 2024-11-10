@@ -1,42 +1,41 @@
 // src/components/layout/Navbar.tsx
+'use client'
 import React from 'react'
-import Link from 'next/link'
 import './Navbar.scss'
+import Link from 'next/link'
+// import { useRouter } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 
-type Props = {
-  icon?: string
-  title?: string
-}
+const navLinks = [
+  { label: 'Popular', href: '/movies/popular' },
+  { label: 'Now Playing', href: '/movies/now-playing' },
+  { label: 'Upcoming', href: '/movies/upcoming' },
+  { label: 'Top Rated', href: '/movies/top-rated' },
+  { label: 'Favorites', href: '/movies/favorites' },
+  { label: 'TV Shows', href: '/serials' },
+  { label: 'Actors', href: '/actors' },
+]
 
-export const Navbar: React.FC<Props> = (
-  {
-    // title = 'MovieApp',
-    // icon = 'fas fa-video',
-  }
-) => {
+export const Navbar: React.FC = () => {
+  const pathname = usePathname()
+
   return (
     <nav>
       <div className='nav-container'>
         <h1>
-          <Link href='/'>
-            {/* 🍿  */}
-            🎬 Movies
-            {/* <i className={icon} /> {title} */}
-          </Link>
+          <Link href='/'>🎬🍿Movies</Link>
         </h1>
         <ul>
-          <li>
-            <Link href='/'>Movies</Link>
-          </li>
-          <li>
-            <Link href='/favorites'>Favorites</Link>
-          </li>
-          <li>
-            <Link href='/serials'>TV Shows</Link>
-          </li>
-          <li>
-            <Link href='/actors'>Actors</Link>
-          </li>
+          {navLinks.map((link) => (
+            <li key={link.href}>
+              <Link
+                href={link.href}
+                className={pathname === link.href ? 'active' : ''}
+              >
+                {link.label}
+              </Link>
+            </li>
+          ))}
         </ul>
       </div>
     </nav>

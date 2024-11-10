@@ -21,6 +21,9 @@ nav {
     }
   }
 }
+.active {
+  border-bottom: red 2px solid;
+}
 
 @media (max-width: 768px) {
   nav {

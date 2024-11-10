@@ -17,14 +17,8 @@ const SerialListPage = async () => {
           title={series.name}
           imagePath={IMG_API + series.poster_path}
           linkPath={`/serials/${series.id}`}
-          subtitle={`${series.vote_average * 10}% | ${new Intl.DateTimeFormat(
-            'en-US',
-            {
-              day: 'numeric',
-              month: 'long',
-              year: 'numeric',
-            }
-          ).format(new Date(series.first_air_date))}`}
+          voteAverage={series.vote_average}
+          date={series.first_air_date}
         />
       ))}
     </div>
