@@ -1,29 +1,33 @@
 // app/page.tsx
-
-import React from 'react'
 import { fetchMovies, IMG_API } from './services/api'
 import { Movie } from './types'
 import CardItem from './components/CardItem'
+import InfiniteScroll from './components/InfiniteScroll'
 
+// This remains a server component
 const HomePage = async () => {
-  const data = await fetchMovies()
-  const movies: Movie[] = data.results
+  // Initial server-side fetch
+  const data = await fetchMovies(1)
+  const initialMovies: Movie[] = data.results
 
   return (
-    <div className='list-container'>
-      {movies.map((movie) => (
-        <CardItem
-          key={movie.id}
-          id={movie.id}
-          linkPath={`/movies/${movie.id}`}
-          title={movie.title}
-          imagePath={IMG_API + movie.poster_path}
-          voteAverage={movie.vote_average}
-          date={movie.release_date}
-        />
-      ))}
-    </div>
+    <InfiniteScroll initialMovies={initialMovies}>
+      {(movies) => (
+        <div className='list-container'>
+          {movies.map((movie) => (
+            <CardItem
+              key={`${movie.id}-${movie.title}`}
+              id={movie.id}
+              linkPath={`/movies/${movie.id}`}
+              title={movie.title}
+              imagePath={IMG_API + movie.poster_path}
+              voteAverage={movie.vote_average}
+              date={movie.release_date}
+            />
+          ))}
+        </div>
+      )}
+    </InfiniteScroll>
   )
 }
-
 export default HomePage

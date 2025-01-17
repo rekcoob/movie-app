@@ -40,13 +40,13 @@ npm build
 npm start
 ```
 
-## 📂 Project Structure
+<!-- ## 📂 Project Structure
 
 - **`/components`** – Reusable components such as `Navbar`, `MovieCards`, etc.
 - **`/pages`** – Next.js pages for routes like Home, Movie Details, and Search.
 - **`/public`** – Static assets (including the 🍿 favicon).
 - **`/styles`** – Global and component-specific SCSS styles.
-- **`/utils`** – Utility functions and API service calls.
+- **`/utils`** – Utility functions and API service calls. -->
 
 ## 📝 Notes
 
@@ -54,10 +54,6 @@ npm start
 - Uses local storage to keep favorite movies across sessions.
 - Infinite scrolling is powered by TMDb’s pagination.
 
-## 🤝 Contributing
-
-If you’d like to contribute, feel free to open issues or submit pull requests. All contributions are welcome!
-
 ---
 
-Built with 🎥 & 🍿 by [b0ock3r](https://rekcoob.github.io)
+Built with 🍿 by [b0ock3r](https://rekcoob.github.io)

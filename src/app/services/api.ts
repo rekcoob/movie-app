@@ -16,16 +16,27 @@ const apiClient = axios.create({
   },
 })
 
-export const fetchMovies = async () => {
+export const fetchMovies = async (page = 1) => {
   try {
     const response = await apiClient.get('/movie/popular', {
-      params: { page: 1 },
+      params: { page },
     })
     return response.data
   } catch {
     throw new Error('Failed to fetch movies')
   }
 }
+
+// export const fetchMovies = async () => {
+//   try {
+//     const response = await apiClient.get('/movie/popular', {
+//       params: { page: 1 },
+//     })
+//     return response.data
+//   } catch {
+//     throw new Error('Failed to fetch movies')
+//   }
+// }
 
 export const fetchSeries = async () => {
   try {
