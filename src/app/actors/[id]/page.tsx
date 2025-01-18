@@ -22,6 +22,7 @@ const ActorItem = async ({ params }: { params: Promise<{ id: string }> }) => {
 
   return (
     <DetailsItem
+      id={actor.id}
       title={name}
       imagePath={profile_path}
       description={biography}

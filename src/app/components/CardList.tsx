@@ -1,84 +1,102 @@
 // components/CardList.tsx
 'use client'
 
-import React, { useEffect, useState } from 'react'
-import { Movie } from '../types'
-import { fetchMovies, IMG_API } from '../services/api'
+import React, { useEffect, useState, useCallback } from 'react'
+import InfiniteScroll from './InfiniteScroll'
 import CardItem from './CardItem'
+import Spinner from './Spinner'
 
-interface CardListProps {
-  initialMovies: Movie[]
+interface BaseItem {
+  id: number
+  title?: string
+  name?: string // for TV shows and actors
+  poster_path?: string
+  profile_path?: string // for actors
+  vote_average?: number
+  release_date?: string
+  first_air_date?: string // for TV shows
 }
 
-const CardList = ({ initialMovies }: CardListProps) => {
-  const [movies, setMovies] = useState<Movie[]>(initialMovies)
-  const [page, setPage] = useState(2) // Start from page 2 since page 1 is server-rendered
+interface CardListProps<T extends BaseItem> {
+  fetchFunction: (page: number) => Promise<{ results: T[] }>
+  initialData?: T[]
+  getImagePath: (item: T) => string
+  getTitle: (item: T) => string
+  getLinkPath: (item: T) => string
+  getDate?: (item: T) => string
+}
+
+const CardList = <T extends BaseItem>({
+  fetchFunction,
+  initialData = [],
+  getImagePath,
+  getTitle,
+  getLinkPath,
+  getDate = () => '',
+}: CardListProps<T>) => {
+  const [items, setItems] = useState<T[]>(initialData)
+  const [page, setPage] = useState(1)
   const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
+  const [hasMore, setHasMore] = useState(true)
 
-  const loadMoreMovies = async () => {
-    try {
-      setLoading(true)
-      setError(null)
-      const data = await fetchMovies(page)
-      setMovies((prev) => [...prev, ...data.results])
-      setPage((prev) => prev + 1)
-    } catch (err) {
-      setError('Failed to load more movies')
-      console.error('Error loading movies:', err)
-    } finally {
-      setLoading(false)
-    }
-  }
+  const loadItems = useCallback(
+    async (pageNum: number) => {
+      try {
+        setLoading(true)
+        const data = await fetchFunction(pageNum)
 
-  const handleScroll = () => {
-    const scrollPosition = window.innerHeight + window.scrollY
-    const threshold = document.documentElement.offsetHeight - 1000
+        if (data.results.length === 0) {
+          setHasMore(false)
+          return
+        }
 
-    if (scrollPosition >= threshold && !loading) {
-      loadMoreMovies()
-    }
-  }
+        setItems((prev) =>
+          pageNum === 1 ? data.results : [...prev, ...data.results]
+        )
+      } catch (error) {
+        console.error('Error fetching items:', error)
+      } finally {
+        setLoading(false)
+      }
+    },
+    [fetchFunction]
+  )
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [loading])
+    if (initialData.length === 0) {
+      loadItems(1)
+    }
+  }, [initialData.length, loadItems])
+
+  const handleLoadMore = () => {
+    setPage((prev) => prev + 1)
+    loadItems(page + 1)
+  }
 
   return (
-    <>
-      <div className='list-container'>
-        {movies.map((movie) => (
+    <InfiniteScroll
+      data={items}
+      loading={loading}
+      hasMore={hasMore}
+      onLoadMore={handleLoadMore}
+      className='list-container'
+      loadingComponent={<Spinner />}
+      endComponent={<p className='text-center'>No more items to load</p>}
+    >
+      {(items) =>
+        items.map((item) => (
           <CardItem
-            key={`${movie.id}-${movie.title}`}
-            id={movie.id}
-            linkPath={`/movies/${movie.id}`}
-            title={movie.title}
-            imagePath={IMG_API + movie.poster_path}
-            voteAverage={movie.vote_average}
-            date={movie.release_date}
+            key={item.id}
+            id={item.id}
+            title={getTitle(item)}
+            imagePath={getImagePath(item)}
+            linkPath={getLinkPath(item)}
+            voteAverage={item.vote_average}
+            date={getDate(item)}
           />
-        ))}
-      </div>
-
-      {loading && (
-        <div className='flex justify-center py-8'>
-          <div className='animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900' />
-        </div>
-      )}
-
-      {error && (
-        <div className='text-center py-4'>
-          <p className='text-red-500'>{error}</p>
-          <button
-            onClick={loadMoreMovies}
-            className='mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600'
-          >
-            Try Again
-          </button>
-        </div>
-      )}
-    </>
+        ))
+      }
+    </InfiniteScroll>
   )
 }
 

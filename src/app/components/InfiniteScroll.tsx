@@ -1,69 +1,55 @@
 // components/InfiniteScroll.tsx
-'use client'
+import React, { useEffect, useRef, ReactNode } from 'react'
+// import Spinner from './Spinner'
 
-import React, { useEffect, useState } from 'react'
-import { Movie } from '../types'
-import { fetchMovies } from '../services/api'
-import styles from './InfiniteScroll.module.css' // Import CSS module
-
-interface InfiniteScrollProps {
-  initialMovies: Movie[]
-  children: (movies: Movie[]) => React.ReactNode
+interface InfiniteScrollProps<T> {
+  data: T[]
+  loading: boolean
+  hasMore: boolean
+  onLoadMore: () => void
+  children: (items: T[]) => ReactNode
+  className?: string
+  loadingComponent?: ReactNode
+  endComponent?: ReactNode
 }
 
-const InfiniteScroll = ({ initialMovies, children }: InfiniteScrollProps) => {
-  const [movies, setMovies] = useState<Movie[]>(initialMovies)
-  const [page, setPage] = useState(2) // Start from page 2 since page 1 is server-rendered
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
-
-  const loadMoreMovies = async () => {
-    try {
-      setLoading(true)
-      setError(null)
-      const data = await fetchMovies(page)
-      setMovies((prev) => [...prev, ...data.results])
-      setPage((prev) => prev + 1)
-    } catch (err) {
-      setError('Failed to load more movies')
-      console.error('Error loading movies:', err)
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  const handleScroll = () => {
-    const scrollPosition = window.innerHeight + window.scrollY
-    const threshold = document.documentElement.offsetHeight - 1000
-
-    if (scrollPosition >= threshold && !loading) {
-      loadMoreMovies()
-    }
-  }
+const InfiniteScroll = <T,>({
+  data,
+  loading,
+  hasMore,
+  onLoadMore,
+  children,
+  className = '',
+  loadingComponent = <p>Loading more items...</p>,
+  endComponent = <p>No more items to load</p>,
+}: InfiniteScrollProps<T>) => {
+  const observerTarget = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [loading])
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !loading && hasMore) {
+          onLoadMore()
+        }
+      },
+      { threshold: 0.5 }
+    )
+
+    if (observerTarget.current) {
+      observer.observe(observerTarget.current)
+    }
+
+    return () => observer.disconnect()
+  }, [loading, hasMore, onLoadMore])
 
   return (
     <>
-      {children(movies)}
+      <div className={className}>{children(data)}</div>
 
-      {loading && (
-        <div className={styles.flexCenter}>
-          <div className={styles.spinner} />
-        </div>
-      )}
-
-      {error && (
-        <div className={styles.textCenter}>
-          <p className={styles.textRed}>{error}</p>
-          <button onClick={loadMoreMovies} className={styles.button}>
-            Try Again
-          </button>
-        </div>
-      )}
+      <div ref={observerTarget} className=''>
+        {loading && loadingComponent}
+        {!hasMore && endComponent}
+      </div>
     </>
   )
 }

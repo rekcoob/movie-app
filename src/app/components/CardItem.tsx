@@ -6,7 +6,7 @@ import Image from 'next/image'
 import { formatVoteAverage, formatDate } from '../services/utils'
 
 const IMG_API = 'https://image.tmdb.org/t/p/w500'
-const NO_IMAGE = '/path/to/placeholder.jpg'
+const NO_IMAGE = '/assets/placeholder.jpg'
 
 interface CardItemProps {
   id: number
