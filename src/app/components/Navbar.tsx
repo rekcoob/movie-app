@@ -12,7 +12,7 @@ const navLinks = [
   { label: 'Upcoming', href: '/movies/upcoming' },
   { label: 'Top Rated', href: '/movies/top-rated' },
   { label: 'Favorites', href: '/movies/favorites' },
-  { label: 'TV Shows', href: '/serials' },
+  { label: 'TV Shows', href: '/series' },
   { label: 'Actors', href: '/actors' },
 ]
 

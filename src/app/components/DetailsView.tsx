@@ -3,67 +3,63 @@
 import React from 'react'
 import Image from 'next/image'
 import ToggleFavorite from './ToggleFavorite'
-import { formatVoteAverage, formatDate } from '../services/utils'
+import { formatVoteAverage, formatDate } from '@/app/services/utils'
+import { IMG_API, NO_IMAGE } from '@/app/services/constants'
+import { ContentDetails, MovieDetails, SeriesDetails } from '@/app/types'
 
 interface DetailsItemProps {
-  id: number
-  title: string
-  imagePath: string | null
-  description: string
-  subtitle?: string
-  additionalInfo?: React.ReactNode // For genres or custom info
-  voteAverage?: number
-  date?: string | null
-  type: 'movie' | 'series' | 'actor'
+  item: ContentDetails
 }
 
-const IMG_API = 'https://image.tmdb.org/t/p/w500'
-const NO_IMAGE = '/path/to/placeholder.jpg'
+const DetailsView: React.FC<DetailsItemProps> = ({ item }) => {
+  const getTitle = (item: ContentDetails) => {
+    if (item.type === 'actor') {
+      return item.name
+    }
+    return item.title
+  }
 
-const DetailsItem: React.FC<DetailsItemProps> = (props) => {
-  const item = {
-    id: props.id,
-    title: props.title,
-    imagePath: props.imagePath,
-    description: props.description,
-    subtitle: props.subtitle,
-    additionalInfo: props.additionalInfo,
-    type: props.type,
+  const shouldShowFavorite = (
+    item: ContentDetails
+  ): item is MovieDetails | SeriesDetails => {
+    return item.type === 'movie' || item.type === 'series'
   }
 
   return (
     <div className='details'>
       <Image
-        src={props.imagePath ? IMG_API + props.imagePath : NO_IMAGE}
-        alt={props.title}
+        src={item.imagePath ? IMG_API + item.imagePath : NO_IMAGE}
+        alt={getTitle(item)}
         width={500}
         height={750}
         placeholder='blur'
         blurDataURL={NO_IMAGE}
       />
       <div className='desc'>
-        <h2>{props.title}</h2>
-        {(props.type === 'movie' || props.type === 'series') && (
-          <ToggleFavorite item={item} />
+        <h2>{getTitle(item)}</h2>
+
+        {shouldShowFavorite(item) && <ToggleFavorite item={item} />}
+
+        {item.additionalInfo && (
+          <div className='additional-info'>{item.additionalInfo}</div>
         )}
 
-        {/* {props.subtitle && <p>{props.subtitle}</p>} */}
-
-        {/* Display voteAverage and date if available */}
-        {(props.voteAverage || props.date) && (
+        {shouldShowFavorite(item) && (
           <p>
-            {props.voteAverage && formatVoteAverage(props.voteAverage)}
-            {props.date && <span> | {formatDate(props.date)}</span>}
+            {formatVoteAverage(item.voteAverage)}
+            {item.type === 'movie' && item.releaseDate && (
+              <span> | {formatDate(item.releaseDate)}</span>
+            )}
+            {item.type === 'series' && item.firstAirDate && (
+              <span> | {formatDate(item.firstAirDate)}</span>
+            )}
           </p>
         )}
 
-        {props.additionalInfo && (
-          <div className='additional-info'>{props.additionalInfo}</div>
-        )}
-        <p>{props.description}</p>
+        <p>{item.description}</p>
       </div>
     </div>
   )
 }
 
-export default DetailsItem
+export default DetailsView

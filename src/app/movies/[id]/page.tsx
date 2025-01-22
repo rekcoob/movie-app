@@ -3,9 +3,9 @@
 import React from 'react'
 import DetailsView from '@/app/components/DetailsView'
 import { fetchMovieById } from '@/app/services/api'
-import { Movie } from '@/app/types'
+import { Movie, MovieDetails } from '@/app/types'
 
-const MovieItemPage = async ({
+const MovieDetailsPage = async ({
   params,
 }: {
   params: Promise<{ id: string }>
@@ -13,25 +13,25 @@ const MovieItemPage = async ({
   const { id } = await params
   const movie: Movie = await fetchMovieById(Number(id))
 
-  return (
-    <DetailsView
-      id={movie.id}
-      title={movie.title}
-      imagePath={movie.poster_path}
-      description={movie.overview}
-      voteAverage={movie.vote_average}
-      date={movie.release_date}
-      additionalInfo={
-        <div className='genres'>
-          {movie.genres &&
-            movie.genres.map((genre, index) => (
-              <span key={genre.id}>{(index ? ', ' : '') + genre.name}</span>
-            ))}
-        </div>
-      }
-      type='movie'
-    />
-  )
+  const movieDetails: MovieDetails = {
+    type: 'movie',
+    id: movie.id,
+    title: movie.title,
+    imagePath: movie.poster_path,
+    description: movie.overview,
+    voteAverage: movie.vote_average,
+    releaseDate: movie.release_date,
+    additionalInfo: (
+      <div className='genres'>
+        {movie.genres &&
+          movie.genres.map((genre, index) => (
+            <span key={genre.id}>{(index ? ', ' : '') + genre.name}</span>
+          ))}
+      </div>
+    ),
+  }
+
+  return <DetailsView item={movieDetails} />
 }
 
-export default MovieItemPage
+export default MovieDetailsPage

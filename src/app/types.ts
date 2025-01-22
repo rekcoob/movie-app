@@ -1,6 +1,13 @@
 // types.ts
 
-export interface Genre {
+// interface BaseItem {
+//   id: number
+//   description: string
+//   imagePath: string | null
+//   additionalInfo?: React.ReactNode
+// }
+
+interface Genre {
   id: number
   name: string
 }
@@ -8,28 +15,58 @@ export interface Genre {
 export interface Movie {
   id: number
   title: string
-  poster_path: string
+  poster_path: string | null
+  overview: string
   vote_average: number
   release_date: string
-  overview: string
-  genres?: Genre[] // Optional genres if you decide to include them later
+  genres: Genre[]
 }
 
-export interface Serial {
+export interface Series {
   id: number
   name: string
   poster_path: string | null
+  overview: string
   vote_average: number
   first_air_date: string
-  genres?: Genre[]
-  overview: string
+  genres: Genre[]
 }
 
 export interface Actor {
   id: number
   name: string
   profile_path: string | null
+  biography: string
   birthday: string | null
-  place_of_birth: string
-  popularity: string
+  place_of_birth: string | null
 }
+
+export interface BaseDetails {
+  id: number
+  description: string
+  imagePath: string | null
+  additionalInfo?: React.ReactNode
+}
+
+export interface MovieDetails extends BaseDetails {
+  type: 'movie'
+  title: string
+  voteAverage: number
+  releaseDate: string
+}
+
+export interface SeriesDetails extends BaseDetails {
+  type: 'series'
+  title: string
+  voteAverage: number
+  firstAirDate: string
+}
+
+export interface ActorDetails extends BaseDetails {
+  type: 'actor'
+  name: string
+  birthday: string | null
+  placeOfBirth: string | null
+}
+
+export type ContentDetails = MovieDetails | SeriesDetails | ActorDetails

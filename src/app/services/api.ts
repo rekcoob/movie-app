@@ -20,6 +20,7 @@ export const fetchMovies = async (page = 1) => {
     const response = await apiClient.get('/movie/popular', {
       params: { page },
     })
+    // console.log(response.data)
     return response.data
   } catch {
     throw new Error('Failed to fetch movies')
@@ -81,7 +82,6 @@ export const fetchSeriesById = async (id: number) => {
 export const fetchActorById = async (id: number) => {
   try {
     const response = await apiClient.get(`/person/${id}`)
-    console.log(response.data)
     return response.data
   } catch {
     throw new Error('Failed to fetch actor')

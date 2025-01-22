@@ -20,7 +20,7 @@ interface BaseItem {
 interface CardListProps<T extends BaseItem> {
   initialData: T[]
   fetchFunction: (page: number) => Promise<{ results: T[] }>
-  getImagePath: (item: T) => string
+  getImagePath: (item: T) => string | null
   getTitle: (item: T) => string
   getLinkPath: (item: T) => string
   getDate?: (item: T) => string
