@@ -2,7 +2,7 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import CardItem from '../../components/CardItem'
+import CardItem from '@/app/components/CardItem'
 
 interface FavoriteMovie {
   id: number

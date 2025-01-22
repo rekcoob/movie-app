@@ -3,7 +3,7 @@
 import React from 'react'
 import DetailsItem from '@/app/components/DetailsItem'
 import { fetchMovieById } from '@/app/services/api'
-import { Movie } from '../../types'
+import { Movie } from '@/app/types'
 
 const MovieItemPage = async ({
   params,

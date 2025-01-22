@@ -1,7 +1,7 @@
 import React from 'react'
 import DetailsItem from '@/app//components/DetailsItem'
 import { fetchSeriesById } from '@/app/services/api'
-import { Series } from '@/app/types'
+import { Serial } from '@/app/types'
 
 /* SeriesDetails */
 const SeriesDetails = async ({
@@ -10,7 +10,7 @@ const SeriesDetails = async ({
   params: Promise<{ id: string }>
 }) => {
   const { id } = await params
-  const series: Series = await fetchSeriesById(Number(id))
+  const series: Serial = await fetchSeriesById(Number(id))
 
   return (
     <DetailsItem

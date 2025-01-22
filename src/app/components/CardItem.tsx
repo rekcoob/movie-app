@@ -3,7 +3,7 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { formatVoteAverage, formatDate } from '../services/utils'
+import { formatVoteAverage, formatDate } from '@/app/services/utils'
 
 const IMG_API = 'https://image.tmdb.org/t/p/w500'
 const NO_IMAGE = '/assets/placeholder.jpg'
