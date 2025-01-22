@@ -1,5 +1,5 @@
 import React from 'react'
-import DetailsItem from '@/app/components/DetailsItem'
+import DetailsView from '@/app/components/DetailsView'
 import { fetchActorById } from '@/app/services/api'
 
 interface Actor {
@@ -21,7 +21,7 @@ const ActorItem = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { name, profile_path, birthday, place_of_birth, biography } = actor
 
   return (
-    <DetailsItem
+    <DetailsView
       id={actor.id}
       title={name}
       imagePath={profile_path}
@@ -38,6 +38,7 @@ const ActorItem = async ({ params }: { params: Promise<{ id: string }> }) => {
           </span>
         )
       }
+      type='actor'
     />
   )
 }

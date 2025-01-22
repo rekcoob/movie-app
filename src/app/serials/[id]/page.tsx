@@ -1,5 +1,5 @@
 import React from 'react'
-import DetailsItem from '@/app//components/DetailsItem'
+import DetailsView from '@/app//components/DetailsView'
 import { fetchSeriesById } from '@/app/services/api'
 import { Serial } from '@/app/types'
 
@@ -13,7 +13,7 @@ const SeriesDetails = async ({
   const series: Serial = await fetchSeriesById(Number(id))
 
   return (
-    <DetailsItem
+    <DetailsView
       id={series.id}
       title={series.name}
       imagePath={series.poster_path}
@@ -28,6 +28,7 @@ const SeriesDetails = async ({
             ))}
         </div>
       }
+      type='series'
     />
   )
 }

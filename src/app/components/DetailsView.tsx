@@ -14,19 +14,21 @@ interface DetailsItemProps {
   additionalInfo?: React.ReactNode // For genres or custom info
   voteAverage?: number
   date?: string | null
+  type: 'movie' | 'series' | 'actor'
 }
 
 const IMG_API = 'https://image.tmdb.org/t/p/w500'
 const NO_IMAGE = '/path/to/placeholder.jpg'
 
 const DetailsItem: React.FC<DetailsItemProps> = (props) => {
-  const movie = {
+  const item = {
     id: props.id,
     title: props.title,
     imagePath: props.imagePath,
     description: props.description,
     subtitle: props.subtitle,
     additionalInfo: props.additionalInfo,
+    type: props.type,
   }
 
   return (
@@ -41,7 +43,9 @@ const DetailsItem: React.FC<DetailsItemProps> = (props) => {
       />
       <div className='desc'>
         <h2>{props.title}</h2>
-        <ToggleFavorite movie={movie} />
+        {(props.type === 'movie' || props.type === 'series') && (
+          <ToggleFavorite item={item} />
+        )}
 
         {/* {props.subtitle && <p>{props.subtitle}</p>} */}
 

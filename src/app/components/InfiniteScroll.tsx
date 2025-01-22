@@ -1,6 +1,5 @@
 // components/InfiniteScroll.tsx
 import React, { useEffect, useRef, ReactNode } from 'react'
-// import Spinner from './Spinner'
 
 interface InfiniteScrollProps<T> {
   data: T[]

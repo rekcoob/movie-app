@@ -2,7 +2,6 @@
 'use client'
 
 import CardList from '../components/CardList'
-import { IMG_API } from '../services/constants'
 import { Movie } from '../types'
 
 interface MoviesClientProps {
@@ -17,7 +16,7 @@ export default function MoviesClient({
     <CardList<Movie>
       initialData={initialData}
       fetchFunction={fetchFunction}
-      getImagePath={(movie) => IMG_API + movie.poster_path}
+      getImagePath={(movie) => movie.poster_path}
       getTitle={(movie) => movie.title}
       getLinkPath={(movie) => `/movies/${movie.id}`}
       getDate={(movie) => movie.release_date}

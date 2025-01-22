@@ -1,7 +1,7 @@
 // app/movies/[id]/page.tsx
 
 import React from 'react'
-import DetailsItem from '@/app/components/DetailsItem'
+import DetailsView from '@/app/components/DetailsView'
 import { fetchMovieById } from '@/app/services/api'
 import { Movie } from '@/app/types'
 
@@ -14,7 +14,7 @@ const MovieItemPage = async ({
   const movie: Movie = await fetchMovieById(Number(id))
 
   return (
-    <DetailsItem
+    <DetailsView
       id={movie.id}
       title={movie.title}
       imagePath={movie.poster_path}
@@ -29,6 +29,7 @@ const MovieItemPage = async ({
             ))}
         </div>
       }
+      type='movie'
     />
   )
 }

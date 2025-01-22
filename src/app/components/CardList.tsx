@@ -18,7 +18,7 @@ interface BaseItem {
 }
 
 interface CardListProps<T extends BaseItem> {
-  initialData: T[] // Now required instead of optional
+  initialData: T[]
   fetchFunction: (page: number) => Promise<{ results: T[] }>
   getImagePath: (item: T) => string
   getTitle: (item: T) => string
