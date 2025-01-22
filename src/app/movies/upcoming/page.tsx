@@ -1,29 +1,18 @@
-// app/page.tsx
+// app/movies/upcoming/page.tsx
 
 import React from 'react'
-import { fetchUpcomingMovies, IMG_API } from '../../services/api'
-import { Movie } from '../../types'
-import CardItem from '../../components/CardItem'
+import { fetchUpcomingMovies } from '../../services/api'
+import MoviesClient from '../MoviesClient'
 
-const HomePage = async () => {
-  const data = await fetchUpcomingMovies()
-  const movies: Movie[] = data.results
+const UpcomingMovies = async () => {
+  const initialData = await fetchUpcomingMovies(1)
 
   return (
-    <div className='list-container'>
-      {movies.map((movie) => (
-        <CardItem
-          key={movie.id}
-          id={movie.id}
-          title={movie.title}
-          imagePath={IMG_API + movie.poster_path}
-          linkPath={`/movies/${movie.id}`}
-          voteAverage={movie.vote_average}
-          date={movie.release_date}
-        />
-      ))}
-    </div>
+    <MoviesClient
+      initialData={initialData.results}
+      fetchFunction={fetchUpcomingMovies}
+    />
   )
 }
 
-export default HomePage
+export default UpcomingMovies

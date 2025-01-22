@@ -1,28 +1,16 @@
-// app/serialList/page.tsx
-import React from 'react'
-import { fetchSeries, IMG_API } from '../services/api'
-import { Series } from '../types'
-import CardItem from '../components/CardItem'
+// app/actors/page.tsx
+import { fetchSeries } from '../services/api'
+import SerialsClient from './SerialsClient'
 
-const SerialListPage = async () => {
-  const data = await fetchSeries()
-  const seriesList: Series[] = data.results
+// export default async function ActorsPage() {
+//   const initialData = await fetchActors(1)
+//   return <ActorsClient initialData={initialData.results} />
+// }
 
-  return (
-    <div className='list-container'>
-      {seriesList.map((series) => (
-        <CardItem
-          key={series.id}
-          id={series.id}
-          title={series.name}
-          imagePath={IMG_API + series.poster_path}
-          linkPath={`/serials/${series.id}`}
-          voteAverage={series.vote_average}
-          date={series.first_air_date}
-        />
-      ))}
-    </div>
-  )
+const SerialsListPage = async () => {
+  const initialData = await fetchSeries(1)
+
+  return <SerialsClient initialData={initialData.results} />
 }
 
-export default SerialListPage
+export default SerialsListPage

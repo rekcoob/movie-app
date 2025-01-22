@@ -4,7 +4,7 @@
 import React, { useEffect, useState } from 'react'
 import CardItem from '../../components/CardItem'
 
-interface Fav {
+interface FavoriteMovie {
   id: number
   title: string
   poster_path: string
@@ -16,7 +16,7 @@ interface Fav {
 }
 
 const FavoritesPage: React.FC = () => {
-  const [favorites, setFavorites] = useState<Fav[]>([])
+  const [favorites, setFavorites] = useState<FavoriteMovie[]>([])
 
   useEffect(() => {
     const savedFavorites = JSON.parse(localStorage.getItem('favorites') || '[]')

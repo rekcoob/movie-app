@@ -15,7 +15,7 @@ export interface Movie {
   genres?: Genre[] // Optional genres if you decide to include them later
 }
 
-export interface Series {
+export interface Serial {
   id: number
   name: string
   poster_path: string | null

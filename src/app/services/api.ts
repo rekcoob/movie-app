@@ -1,11 +1,10 @@
 // services/api.ts
+'use server'
 
 import axios from 'axios'
 
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY
 const BASE_URL = 'https://api.themoviedb.org/3'
-
-export const IMG_API = 'https://image.tmdb.org/t/p/w500'
 
 // Create an axios instance with default settings
 const apiClient = axios.create({
@@ -38,21 +37,20 @@ export const fetchMovies = async (page = 1) => {
 //   }
 // }
 
-export const fetchSeries = async () => {
+export const fetchSeries = async (page = 1) => {
   try {
-    const response = await apiClient.get('/tv/popular', { params: { page: 1 } })
+    const response = await apiClient.get('/tv/popular', { params: { page } })
     return response.data
   } catch {
     throw new Error('Failed to fetch series')
   }
 }
 
-export const fetchActors = async () => {
+export const fetchActors = async (page = 1) => {
   try {
     const response = await apiClient.get('/person/popular', {
-      params: { page: 1 },
+      params: { page },
     })
-    console.log(response.data)
     return response.data
   } catch {
     throw new Error('Failed to fetch actors')
@@ -103,10 +101,10 @@ export const fetchPopularMovies = async () => {
 }
 
 // Fetch now playing movies
-export const fetchNowPlayingMovies = async () => {
+export const fetchNowPlayingMovies = async (page = 1) => {
   try {
     const response = await apiClient.get('/movie/now_playing', {
-      params: { page: 1 },
+      params: { page },
     })
     return response.data
   } catch {
@@ -115,10 +113,10 @@ export const fetchNowPlayingMovies = async () => {
 }
 
 // Fetch upcoming movies
-export const fetchUpcomingMovies = async () => {
+export const fetchUpcomingMovies = async (page = 1) => {
   try {
     const response = await apiClient.get('/movie/upcoming', {
-      params: { page: 1 },
+      params: { page },
     })
     return response.data
   } catch {
@@ -127,10 +125,10 @@ export const fetchUpcomingMovies = async () => {
 }
 
 // Fetch top-rated movies
-export const fetchTopRatedMovies = async () => {
+export const fetchTopRatedMovies = async (page = 1) => {
   try {
     const response = await apiClient.get('/movie/top_rated', {
-      params: { page: 1 },
+      params: { page },
     })
     return response.data
   } catch {
