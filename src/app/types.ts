@@ -40,7 +40,7 @@ export interface Actor {
   name: string
   profile_path: string | null
   biography: string
-  birthday: string | null
+  birthday: string
   place_of_birth: string | null
 }
 

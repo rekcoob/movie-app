@@ -18,6 +18,7 @@ export default function ActorsClient({ initialData }: SeriesClientProps) {
       getImagePath={(series) => IMG_API + series.poster_path}
       getTitle={(series) => series.name}
       getLinkPath={(series) => `/series/${series.id}`}
+      getDate={(series) => series.first_air_date}
     />
   )
 }

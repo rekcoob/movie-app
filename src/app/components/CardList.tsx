@@ -15,6 +15,7 @@ interface BaseItem {
   vote_average?: number
   release_date?: string
   first_air_date?: string // for TV shows
+  birthday?: string // for actors
 }
 
 interface CardListProps<T extends BaseItem> {

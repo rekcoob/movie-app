@@ -17,6 +17,20 @@ ul {
   list-style: none;
 }
 
+/* Reusable Utility Classes  */
+.flex {
+  display: flex;
+}
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+.center {
+  align-items: center;
+  justify-content: center;
+}
+
+// container
 .container {
   max-width: 1024px;
   margin: auto;
@@ -44,13 +58,6 @@ ul {
     opacity: 0.75;
   }
 }
-
-// .details-wrapper {
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   align-items: center;
-// }
 
 // Details Page
 .details {

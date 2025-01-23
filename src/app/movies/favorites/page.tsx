@@ -7,15 +7,14 @@ import CardItem from '@/app/components/CardItem'
 interface FavoriteMovie {
   id: number
   title: string
-  poster_path: string
-  imagePath: string
-  vote_average: number
-  release_date: string
-  overview: string
-  // genres?: Genre[]
+  imagePath: string | null
+  voteAverage?: number
+  releaseDate?: string
+  firstAirDate?: string
+  type: 'movie' | 'series' | 'actor'
 }
 
-const FavoritesPage: React.FC = () => {
+export default function FavoritesPage() {
   const [favorites, setFavorites] = useState<FavoriteMovie[]>([])
 
   useEffect(() => {
@@ -25,24 +24,28 @@ const FavoritesPage: React.FC = () => {
   }, [])
 
   return (
-    <div className='list-container'>
+    <>
       {favorites.length > 0 ? (
-        favorites.map((fav) => (
-          <CardItem
-            key={fav.id}
-            id={fav.id}
-            title={fav.title}
-            imagePath={fav.imagePath}
-            linkPath={`/movies/${fav.id}`}
-            voteAverage={fav.vote_average}
-            date={fav.release_date}
-          />
-        ))
+        <div className='list-container'>
+          {favorites.map((fav) => (
+            <CardItem
+              key={fav.id}
+              id={fav.id}
+              title={fav.title}
+              imagePath={fav.imagePath}
+              linkPath={`/${fav.type === 'movie' ? 'movies' : 'series'}/${
+                fav.id
+              }`}
+              voteAverage={fav.voteAverage}
+              date={fav.releaseDate || fav.firstAirDate}
+            />
+          ))}
+        </div>
       ) : (
-        <p>No favorites added yet.</p>
+        <div style={{ height: 'calc(100vh - 5.5rem)' }} className='flex center'>
+          <p style={{ fontSize: '2rem' }}>No favorites added yet.</p>
+        </div>
       )}
-    </div>
+    </>
   )
 }
-
-export default FavoritesPage

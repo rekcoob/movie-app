@@ -1,6 +1,7 @@
 import React from 'react'
 import DetailsView from '@/app/components/DetailsView'
 import { fetchActorById } from '@/app/services/api'
+import { formatDate } from '@/app/services/utils'
 import { Actor, ActorDetails } from '@/app/types'
 
 const ActorDetailsPage = async ({
@@ -21,12 +22,8 @@ const ActorDetailsPage = async ({
     placeOfBirth: actor.place_of_birth,
     additionalInfo: actor.birthday && (
       <span>
-        {new Intl.DateTimeFormat('en-US', {
-          month: 'long',
-          day: 'numeric',
-          year: 'numeric',
-        }).format(new Date(actor.birthday))}{' '}
-        | {actor.place_of_birth && <span>{actor.place_of_birth}</span>}
+        {formatDate(actor.birthday)} |{' '}
+        {actor.place_of_birth && <span>{actor.place_of_birth}</span>}
       </span>
     ),
   }

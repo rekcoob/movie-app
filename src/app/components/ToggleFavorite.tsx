@@ -9,10 +9,11 @@ interface Item {
   id: number
   title: string
   imagePath: string | null
-  description: string
-  subtitle?: string
   additionalInfo?: React.ReactNode
   type: 'movie' | 'series' | 'actor'
+  voteAverage?: number
+  releaseDate?: string
+  firstAirDate?: string
 }
 
 interface ToggleFavoriteProps {
@@ -32,7 +33,16 @@ const ToggleFavorite: React.FC<ToggleFavoriteProps> = ({ item }) => {
   }, [item.id, item.type])
 
   const handleToggleFavorite = () => {
-    toggleFavorite(item)
+    const favoriteItem = {
+      id: item.id,
+      title: item.title,
+      imagePath: item.imagePath,
+      voteAverage: item.voteAverage,
+      releaseDate: item.releaseDate,
+      firstAirDate: item.firstAirDate,
+      type: item.type,
+    }
+    toggleFavorite(favoriteItem)
     setIsFav(!isFav)
   }
 

@@ -6,7 +6,11 @@ import React, { createContext, useContext, useEffect, useState } from 'react'
 interface Movie {
   id: number
   title: string
-  // Add other properties as needed
+  imagePath: string | null
+  voteAverage?: number
+  releaseDate?: string
+  firstAirDate?: string
+  type: 'movie' | 'series' | 'actor'
 }
 
 interface FavoritesContextType {
@@ -43,7 +47,17 @@ export const FavoritesProvider: React.FC<{ children: React.ReactNode }> = ({
       )
     } else {
       // If the movie does not exist, add it to favorites
-      setFavorites((prevFavorites) => [...prevFavorites, movie])
+      const newFavorite = {
+        id: movie.id,
+        title: movie.title,
+        imagePath: movie.imagePath,
+        voteAverage: movie.voteAverage,
+        releaseDate: movie.releaseDate,
+        firstAirDate: movie.firstAirDate,
+        type: movie.type,
+      }
+
+      setFavorites((prevFavorites) => [...prevFavorites, newFavorite])
     }
   }
 
