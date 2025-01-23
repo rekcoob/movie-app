@@ -20,6 +20,9 @@ export interface Movie {
   vote_average: number
   release_date: string
   genres: Genre[]
+  videos?: {
+    results: VideoResult[]
+  }
 }
 
 export interface Series {
@@ -41,11 +44,20 @@ export interface Actor {
   place_of_birth: string | null
 }
 
+export interface VideoResult {
+  key: string
+  site: string
+  type: string
+  name: string
+}
+
 export interface BaseDetails {
   id: number
   description: string
   imagePath: string | null
   additionalInfo?: React.ReactNode
+  // trailer
+  videos?: VideoResult[]
 }
 
 export interface MovieDetails extends BaseDetails {

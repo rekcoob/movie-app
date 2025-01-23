@@ -21,6 +21,7 @@ const MovieDetailsPage = async ({
     description: movie.overview,
     voteAverage: movie.vote_average,
     releaseDate: movie.release_date,
+    videos: movie.videos?.results,
     additionalInfo: (
       <div className='genres'>
         {movie.genres &&

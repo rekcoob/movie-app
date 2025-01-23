@@ -20,7 +20,7 @@ export const fetchMovies = async (page = 1) => {
     const response = await apiClient.get('/movie/popular', {
       params: { page },
     })
-    // console.log(response.data)
+
     return response.data
   } catch {
     throw new Error('Failed to fetch movies')
@@ -58,10 +58,12 @@ export const fetchActors = async (page = 1) => {
   }
 }
 
-// Fetch a single movie by ID
 export const fetchMovieById = async (id: number) => {
   try {
-    const response = await apiClient.get(`/movie/${id}`)
+    const response = await apiClient.get(`/movie/${id}`, {
+      params: { append_to_response: 'videos' },
+    })
+    console.log(response.data)
     return response.data
   } catch {
     throw new Error('Failed to fetch movie')
@@ -71,7 +73,9 @@ export const fetchMovieById = async (id: number) => {
 // Fetch a single series by ID
 export const fetchSeriesById = async (id: number) => {
   try {
-    const response = await apiClient.get(`/tv/${id}`)
+    const response = await apiClient.get(`/tv/${id}`, {
+      params: { append_to_response: 'videos' },
+    })
     return response.data
   } catch {
     throw new Error('Failed to fetch series')

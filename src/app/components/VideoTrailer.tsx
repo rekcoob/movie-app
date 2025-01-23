@@ -1,0 +1,32 @@
+// components/VideoTrailer.tsx
+import React from 'react'
+import { VideoResult } from '@/app/types'
+
+interface VideoTrailerProps {
+  videos?: VideoResult[]
+}
+
+const VideoTrailer: React.FC<VideoTrailerProps> = ({ videos }) => {
+  const trailer = videos?.find(
+    (video) => video.site === 'YouTube' && video.type === 'Trailer'
+  )
+
+  if (!trailer) return null
+
+  return (
+    <div className='mt-8'>
+      <h3 className='text-xl font-semibold mb-4'>Trailer</h3>
+      <div className='relative pb-[56.25%] h-0'>
+        <iframe
+          className='absolute top-0 left-0 w-full h-full rounded-lg'
+          src={`https://www.youtube.com/embed/${trailer.key}`}
+          title={trailer.name}
+          allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+          allowFullScreen
+        />
+      </div>
+    </div>
+  )
+}
+
+export default VideoTrailer
