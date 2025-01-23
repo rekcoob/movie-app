@@ -14,9 +14,9 @@ const VideoTrailer: React.FC<VideoTrailerProps> = ({ videos }) => {
   if (!trailer) return null
 
   return (
-    <div className='mt-8'>
-      <h3 className='text-xl font-semibold mb-4'>Trailer</h3>
-      <div className='relative pb-[56.25%] h-0'>
+    <div className='video-trailer'>
+      <h3>Trailer</h3>
+      <div className='video-wrapper'>
         <iframe
           className='absolute top-0 left-0 w-full h-full rounded-lg'
           src={`https://www.youtube.com/embed/${trailer.key}`}

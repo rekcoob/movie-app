@@ -27,13 +27,13 @@ const DetailsView: React.FC<DetailsItemProps> = ({ item }) => {
   }
 
   return (
-    <div className=''>
+    <div className='details-wrapper'>
       <div className='details'>
         <Image
           src={item.imagePath ? IMG_API + item.imagePath : NO_IMAGE}
           alt={getTitle(item)}
-          width={500}
-          height={750}
+          width={420}
+          height={600}
           placeholder='blur'
           blurDataURL={NO_IMAGE}
         />
@@ -48,7 +48,7 @@ const DetailsView: React.FC<DetailsItemProps> = ({ item }) => {
 
           {shouldShowFavorite(item) && (
             <p>
-              {formatVoteAverage(item.voteAverage)}
+              <span>{formatVoteAverage(item.voteAverage)}</span>
               {item.type === 'movie' && item.releaseDate && (
                 <span> | {formatDate(item.releaseDate)}</span>
               )}

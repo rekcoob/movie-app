@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
 * {
   box-sizing: border-box;
   margin: 0;
@@ -16,7 +17,6 @@ ul {
   list-style: none;
 }
 
-// Container
 .container {
   max-width: 1024px;
   margin: auto;
@@ -32,7 +32,6 @@ ul {
 .card {
   margin: 1rem;
   img {
-    // object-fit: cover;
     max-width: 100%;
   }
   h3 {
@@ -46,30 +45,37 @@ ul {
   }
 }
 
-// Movie | Serial | Actor Details Page
+// .details-wrapper {
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+// }
+
+// Details Page
 .details {
-  position: relative;
   display: flex;
   // border-bottom: 1px solid #718096;
   img {
-    // width: 35%;
+    margin: 0 3rem;
     padding: 4rem 1rem;
   }
   .desc {
-    margin: 3rem 2rem 2rem;
+    // margin: 3rem 0rem 2rem;
+    margin-top: 3.5rem;
+    margin-left: 1rem;
     h2 {
-      margin: 1rem 0;
       font-size: 2.1rem;
       font-weight: 500;
-    }
-    span {
-      font-weight: 400;
-      font-size: 1.1rem;
     }
     p {
       margin: 1rem 0;
       font-weight: 200;
       font-size: 1.2rem;
+    }
+    span {
+      font-weight: 400;
+      font-size: 1.1rem;
     }
     .genres {
       span {
@@ -88,11 +94,12 @@ ul {
   }
   .details {
     img {
-      width: 40%;
+      margin: 0 1.5rem;
     }
     margin: 0 1.5rem;
     .desc {
-      margin: 3rem 2rem 2rem;
+      margin-top: 3rem;
+      margin-left: 1rem;
       h2 {
         font-size: 2rem;
       }
@@ -141,15 +148,26 @@ ul {
     }
   }
 }
-// /* src/styles/components/ToggleFavorite.module.scss */
-// .favorite-toggle {
-//   background: none;
-//   border: none;
-//   font-size: 1.5rem;
-//   cursor: pointer;
-//   transition: color 0.3s ease;
-// }
 
-// .favorite-toggle:hover {
-//   opacity: 0.8;
-// }
+// Video Trailer
+.video-trailer {
+  margin-top: 2rem;
+  h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+  .video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; // 16:9 aspect ratio
+    height: 0;
+  }
+  iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0.5rem;
+  }
+}

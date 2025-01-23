@@ -12,7 +12,7 @@ const navLinks = [
   { label: 'Upcoming', href: '/movies/upcoming' },
   { label: 'Top Rated', href: '/movies/top-rated' },
   { label: 'Favorites', href: '/movies/favorites' },
-  { label: 'TV Shows', href: '/series' },
+  { label: 'Series', href: '/series' },
   { label: 'Actors', href: '/actors' },
 ]
 
@@ -23,7 +23,9 @@ export const Navbar: React.FC = () => {
     <nav>
       <div className='nav-container'>
         <h1>
-          <Link href='/'>🎬🍿Movies</Link>
+          <Link href='/'>
+            🎬<span> Movies App</span>
+          </Link>
         </h1>
         <ul>
           {navLinks.map((link) => (

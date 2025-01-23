@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react'
 import { useFavorites } from '@/app/context/FavoritesContext'
 import { HeartFilled } from '@/app/components/icons/HeartFilled'
 import { HeartOutline } from '@/app/components/icons/HeartOutline'
-// import { Movie } from '@/app/types'
 
 interface Item {
   id: number
@@ -41,7 +40,8 @@ const ToggleFavorite: React.FC<ToggleFavoriteProps> = ({ item }) => {
     <button
       onClick={handleToggleFavorite}
       style={{
-        fontSize: '2.1rem',
+        // fontSize: '2.1rem',
+        marginBottom: '3px',
         cursor: 'pointer',
         border: 'none',
         background: 'none',
