@@ -16,14 +16,14 @@ interface CardItemProps {
   date?: string | null
 }
 
-const CardItem: React.FC<CardItemProps> = ({
+export default function CardItem({
   id,
   title,
   imagePath,
   linkPath,
   voteAverage,
   date,
-}) => {
+}: CardItemProps) {
   return (
     <div className='card' key={id}>
       <Link href={linkPath}>
@@ -45,5 +45,3 @@ const CardItem: React.FC<CardItemProps> = ({
     </div>
   )
 }
-
-export default CardItem

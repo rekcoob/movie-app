@@ -1,7 +1,7 @@
 // components/CardList.tsx
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import InfiniteScroll from './InfiniteScroll'
 import CardItem from './CardItem'
 import Spinner from './Spinner'
@@ -26,34 +26,36 @@ interface CardListProps<T extends BaseItem> {
   getDate?: (item: T) => string
 }
 
-const CardList = <T extends BaseItem>({
+export default function CardList<T extends BaseItem>({
   initialData,
   fetchFunction,
   getImagePath,
   getTitle,
   getLinkPath,
   getDate = () => '',
-}: CardListProps<T>) => {
+}: CardListProps<T>) {
   const [items, setItems] = useState<T[]>(initialData)
+  const [loading, setLoading] = useState(true)
   const [page, setPage] = useState(2) // Start from page 2 since page 1 is initial data
-  const [loading, setLoading] = useState(false)
   const [hasMore, setHasMore] = useState(true)
+
+  useEffect(() => {
+    if (initialData.length > 0) {
+      setLoading(false)
+    }
+  }, [initialData])
 
   const loadItems = async (pageNum: number) => {
     try {
-      setLoading(true)
       const data = await fetchFunction(pageNum)
 
       if (data.results.length === 0) {
         setHasMore(false)
         return
       }
-
       setItems((prev) => [...prev, ...data.results])
     } catch (error) {
       console.error('Error fetching items:', error)
-    } finally {
-      setLoading(false)
     }
   }
 
@@ -62,18 +64,16 @@ const CardList = <T extends BaseItem>({
     loadItems(page)
   }
 
-  // if (loading) {
-  //   return <Spinner />
-  // }
+  if (loading) {
+    return <Spinner />
+  }
 
   return (
     <InfiniteScroll
       data={items}
-      loading={loading}
       hasMore={hasMore}
       onLoadMore={handleLoadMore}
       className='list-container'
-      loadingComponent={<Spinner />}
       endComponent={<p className='text-center'>No more items to load</p>}
     >
       {(items) =>
@@ -92,5 +92,3 @@ const CardList = <T extends BaseItem>({
     </InfiniteScroll>
   )
 }
-
-export default CardList

@@ -1,19 +1,21 @@
 import type { Metadata } from 'next'
-import localFont from 'next/font/local'
+import { Poppins } from 'next/font/google'
+// import localFont from 'next/font/local'
 import './globals.scss'
 import Head from 'next/head'
 import { Navbar } from './components/Navbar'
 import { FavoritesProvider } from './context/FavoritesContext'
 
-const geistSans = localFont({
-  src: './fonts/GeistVF.woff',
-  variable: '--font-geist-sans',
-  weight: '100 900',
-})
-const geistMono = localFont({
-  src: './fonts/GeistMonoVF.woff',
-  variable: '--font-geist-mono',
-  weight: '100 900',
+// const geistSans = localFont({
+//   src: './fonts/GeistVF.woff',
+//   variable: '--font-geist-sans',
+//   weight: '100 900',
+// })
+
+const poppins = Poppins({
+  weight: ['200', '300', '400', '500', '600'],
+  subsets: ['latin'],
+  display: 'swap',
 })
 
 export const metadata: Metadata = {
@@ -32,7 +34,7 @@ export default function RootLayout({
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body className={poppins.className}>
         <FavoritesProvider>
           <Navbar />
           <div className='container'>{children}</div>

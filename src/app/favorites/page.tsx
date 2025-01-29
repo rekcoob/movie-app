@@ -21,14 +21,12 @@ export default function FavoritesPage() {
 
   useEffect(() => {
     const savedFavorites = JSON.parse(localStorage.getItem('favorites') || '[]')
-    // console.log(savedFavorites)
     setFavorites(savedFavorites)
     setLoading(false)
   }, [])
 
   if (loading) {
-    // return <p className='no-favorites'>Loading...</p> // Zobrazenie počas načítavania
-    return <Spinner /> // Zobrazenie počas načítavania
+    return <Spinner />
   }
 
   return (
