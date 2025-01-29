@@ -33,6 +33,9 @@ export interface Series {
   vote_average: number
   first_air_date: string
   genres: Genre[]
+  videos?: {
+    results: VideoResult[]
+  }
 }
 
 export interface Actor {

@@ -15,7 +15,6 @@ interface BaseItem {
   vote_average?: number
   release_date?: string
   first_air_date?: string // for TV shows
-  birthday?: string // for actors
 }
 
 interface CardListProps<T extends BaseItem> {
@@ -62,6 +61,10 @@ const CardList = <T extends BaseItem>({
     setPage((prev) => prev + 1)
     loadItems(page)
   }
+
+  // if (loading) {
+  //   return <Spinner />
+  // }
 
   return (
     <InfiniteScroll

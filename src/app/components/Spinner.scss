@@ -6,16 +6,17 @@
 }
 
 .spinner {
-  width: 88px;
-  height: 88px;
-
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
-  background: conic-gradient(#0000 10%, #ff0000);
-  // -webkit-mask: radial-gradient(
-  //   farthest-side,
-  //   #0000 calc(100% - 14.1px),
-  //   #000 0
-  // );
+  margin-top: -10rem;
+
+  background: conic-gradient(#0000 10%, white);
+  -webkit-mask: radial-gradient(
+    farthest-side,
+    #0000 calc(100% - 14.1px),
+    #000 0
+  );
   animation: spin 1s infinite linear;
 }
 

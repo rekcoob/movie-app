@@ -3,6 +3,7 @@
 
 import React, { useEffect, useState } from 'react'
 import CardItem from '@/app/components/CardItem'
+import Spinner from '@/app/components/Spinner'
 
 interface FavoriteMovie {
   id: number
@@ -16,12 +17,19 @@ interface FavoriteMovie {
 
 export default function FavoritesPage() {
   const [favorites, setFavorites] = useState<FavoriteMovie[]>([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const savedFavorites = JSON.parse(localStorage.getItem('favorites') || '[]')
-    console.log(savedFavorites)
+    // console.log(savedFavorites)
     setFavorites(savedFavorites)
+    setLoading(false)
   }, [])
+
+  if (loading) {
+    // return <p className='no-favorites'>Loading...</p> // Zobrazenie počas načítavania
+    return <Spinner /> // Zobrazenie počas načítavania
+  }
 
   return (
     <>

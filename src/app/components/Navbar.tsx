@@ -3,15 +3,14 @@
 import React from 'react'
 import './Navbar.scss'
 import Link from 'next/link'
-// import { useRouter } from 'next/navigation'
 import { usePathname } from 'next/navigation'
 
 const navLinks = [
+  { label: 'Top Rated', href: '/movies/top-rated' },
   { label: 'Popular', href: '/movies/popular' },
   // { label: 'Now Playing', href: '/movies/now-playing' },
-  { label: 'Upcoming', href: '/movies/upcoming' },
-  { label: 'Top Rated', href: '/movies/top-rated' },
-  { label: 'Favorites', href: '/movies/favorites' },
+  // { label: 'Upcoming', href: '/movies/upcoming' },
+  { label: 'Favorites', href: '/favorites' },
   { label: 'Series', href: '/series' },
   { label: 'Actors', href: '/actors' },
 ]
@@ -24,7 +23,7 @@ export const Navbar: React.FC = () => {
       <div className='nav-container'>
         <h1>
           <Link href='/'>
-            🎬<span> Movies App</span>
+            🎬<span> Movie App</span>
           </Link>
         </h1>
         <ul>

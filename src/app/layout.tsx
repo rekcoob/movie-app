@@ -29,7 +29,8 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <Head>
-        <link rel='icon' href='/favicon.ico' />
+        <link rel='icon' href='/popcorn-favicon.png' />
+        {/* <link rel='icon' href='/favicon.ico' /> */}
       </Head>
 
       <body className={`${geistSans.variable} ${geistMono.variable}`}>

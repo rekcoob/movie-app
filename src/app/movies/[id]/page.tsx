@@ -5,11 +5,11 @@ import DetailsView from '@/app/components/DetailsView'
 import { fetchMovieById } from '@/app/services/api'
 import { Movie, MovieDetails } from '@/app/types'
 
-const MovieDetailsPage = async ({
+export default async function MovieDetailsPage({
   params,
 }: {
   params: Promise<{ id: string }>
-}) => {
+}) {
   const { id } = await params
   const movie: Movie = await fetchMovieById(Number(id))
 
@@ -34,5 +34,3 @@ const MovieDetailsPage = async ({
 
   return <DetailsView item={movieDetails} />
 }
-
-export default MovieDetailsPage

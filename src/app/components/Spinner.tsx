@@ -1,4 +1,4 @@
-// components/Spinner.js
+// components/Spinner.tsx
 import './Spinner.scss'
 
 export default function Spinner() {

@@ -4,7 +4,7 @@ import React from 'react'
 import { fetchMovies } from '../../services/api'
 import MoviesClient from '../MoviesClient'
 
-const PopularMoviesPage = async () => {
+export default async function PopularMoviesPage() {
   const initialData = await fetchMovies(1)
 
   return (
@@ -14,8 +14,6 @@ const PopularMoviesPage = async () => {
     />
   )
 }
-
-export default PopularMoviesPage
 
 // import React from 'react'
 // import { fetchMovies } from './services/api'

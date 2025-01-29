@@ -27,6 +27,7 @@ const SeriesDetailsPage = async ({
           ))}
       </div>
     ),
+    videos: series.videos?.results,
   }
 
   return <DetailsView item={seriesDetails} />
