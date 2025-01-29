@@ -3,9 +3,8 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { IMG_API } from '@/app//services/constants'
+import { IMG_API, NO_IMAGE } from '@/app/services/constants'
 import { formatVoteAverage, formatDate } from '@/app/services/utils'
-const NO_IMAGE = '@/app/assets/image-not-found.png'
 
 interface CardItemProps {
   id: number
@@ -34,8 +33,7 @@ const CardItem: React.FC<CardItemProps> = ({
             alt={title}
             width={224}
             height={336}
-            placeholder='blur'
-            blurDataURL={NO_IMAGE}
+            placeholder='empty'
           />
           <h3>{title}</h3>
           <p>

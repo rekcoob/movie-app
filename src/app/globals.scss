@@ -93,6 +93,29 @@ ul {
   }
 }
 
+// Video Trailer
+.video-trailer {
+  margin-top: 2rem;
+  h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+  .video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; // 16:9 aspect ratio
+    height: 0;
+  }
+  iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0.5rem;
+  }
+}
+
 // Responsive media queries
 @media (max-width: 1024px) {
   .list-container {
@@ -153,28 +176,5 @@ ul {
     img {
       width: 80%;
     }
-  }
-}
-
-// Video Trailer
-.video-trailer {
-  margin-top: 2rem;
-  h3 {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-  }
-  .video-wrapper {
-    position: relative;
-    padding-bottom: 56.25%; // 16:9 aspect ratio
-    height: 0;
-  }
-  iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 0.5rem;
   }
 }

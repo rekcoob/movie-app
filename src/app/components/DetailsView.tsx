@@ -34,8 +34,7 @@ const DetailsView: React.FC<DetailsItemProps> = ({ item }) => {
           alt={getTitle(item)}
           width={420}
           height={600}
-          placeholder='blur'
-          blurDataURL={NO_IMAGE}
+          placeholder='empty'
         />
         <div className='desc'>
           <h2>{getTitle(item)}</h2>
