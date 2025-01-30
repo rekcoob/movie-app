@@ -1,16 +1,9 @@
 import type { Metadata } from 'next'
 import { Poppins } from 'next/font/google'
-// import localFont from 'next/font/local'
 import './globals.scss'
 import Head from 'next/head'
-import { Navbar } from './components/Navbar'
 import { FavoritesProvider } from './context/FavoritesContext'
-
-// const geistSans = localFont({
-//   src: './fonts/GeistVF.woff',
-//   variable: '--font-geist-sans',
-//   weight: '100 900',
-// })
+import { Navbar } from './components/Navbar'
 
 const poppins = Poppins({
   weight: ['200', '300', '400', '500', '600'],

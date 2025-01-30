@@ -3,15 +3,15 @@
 
 import CardList from '../components/CardList'
 import { fetchActors } from '../services/api'
-import { Actor } from '../types'
+import { IActor } from '../types'
 
 interface ActorsClientProps {
-  initialData: Actor[]
+  initialData: IActor[]
 }
 
 export default function ActorsClient({ initialData }: ActorsClientProps) {
   return (
-    <CardList<Actor>
+    <CardList<IActor>
       initialData={initialData}
       fetchFunction={fetchActors}
       getImagePath={(actor) => actor.profile_path}

@@ -2,18 +2,18 @@
 'use client'
 
 import CardList from '../components/CardList'
-import { Movie } from '../types'
+import { IMovie } from '../types'
 
 interface MoviesClientProps {
-  initialData: Movie[]
-  fetchFunction: (page: number) => Promise<{ results: Movie[] }>
+  initialData: IMovie[]
+  fetchFunction: (page: number) => Promise<{ results: IMovie[] }>
 }
 export default function MoviesClient({
   initialData,
   fetchFunction,
 }: MoviesClientProps) {
   return (
-    <CardList<Movie>
+    <CardList<IMovie>
       initialData={initialData}
       fetchFunction={fetchFunction}
       getImagePath={(movie) => movie.poster_path}

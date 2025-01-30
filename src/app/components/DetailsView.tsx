@@ -1,19 +1,29 @@
 // components/DetailsItem.tsx
+'use client'
 
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import ToggleFavorite from './ToggleFavorite'
 import VideoTrailer from './VideoTrailer'
 import { formatVoteAverage, formatDate } from '@/app/services/utils'
 import { IMG_API, NO_IMAGE } from '@/app/services/constants'
-import { ContentDetails, MovieDetails, SeriesDetails } from '@/app/types'
+import { IContentDetails, IMovieDetails, ISeriesDetails } from '@/app/types'
+import Spinner from './Spinner'
 
 interface DetailsItemProps {
-  item: ContentDetails
+  item: IContentDetails
 }
 
 const DetailsView: React.FC<DetailsItemProps> = ({ item }) => {
-  const getTitle = (item: ContentDetails) => {
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    if (item) {
+      setLoading(false)
+    }
+  }, [item])
+
+  const getTitle = (item: IContentDetails) => {
     if (item.type === 'actor') {
       return item.name
     }
@@ -21,9 +31,13 @@ const DetailsView: React.FC<DetailsItemProps> = ({ item }) => {
   }
 
   const shouldShowFavorite = (
-    item: ContentDetails
-  ): item is MovieDetails | SeriesDetails => {
+    item: IContentDetails
+  ): item is IMovieDetails | ISeriesDetails => {
     return item.type === 'movie' || item.type === 'series'
+  }
+
+  if (loading) {
+    return <Spinner />
   }
 
   return (

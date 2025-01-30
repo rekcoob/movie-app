@@ -3,15 +3,15 @@
 
 import CardList from '../components/CardList'
 import { fetchSeries } from '../services/api'
-import { Series } from '../types'
+import { ISeries } from '../types'
 
 interface SeriesClientProps {
-  initialData: Series[]
+  initialData: ISeries[]
 }
 
 export default function ActorsClient({ initialData }: SeriesClientProps) {
   return (
-    <CardList<Series>
+    <CardList<ISeries>
       initialData={initialData}
       fetchFunction={fetchSeries}
       getImagePath={(series) => series.poster_path}

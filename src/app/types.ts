@@ -7,38 +7,38 @@
 //   additionalInfo?: React.ReactNode
 // }
 
-interface Genre {
+interface IGenre {
   id: number
   name: string
 }
 
-export interface Movie {
+export interface IMovie {
   id: number
   title: string
   poster_path: string | null
   overview: string
   vote_average: number
   release_date: string
-  genres: Genre[]
+  genres: IGenre[]
   videos?: {
-    results: VideoResult[]
+    results: IVideoResult[]
   }
 }
 
-export interface Series {
+export interface ISeries {
   id: number
   name: string
   poster_path: string | null
   overview: string
   vote_average: number
   first_air_date: string
-  genres: Genre[]
+  genres: IGenre[]
   videos?: {
-    results: VideoResult[]
+    results: IVideoResult[]
   }
 }
 
-export interface Actor {
+export interface IActor {
   id: number
   name: string
   profile_path: string | null
@@ -47,41 +47,40 @@ export interface Actor {
   place_of_birth: string | null
 }
 
-export interface VideoResult {
+export interface IVideoResult {
   key: string
   site: string
   type: string
   name: string
 }
 
-export interface BaseDetails {
+export interface IBaseDetails {
   id: number
   description: string
   imagePath: string | null
   additionalInfo?: React.ReactNode
-  // trailer
-  videos?: VideoResult[]
+  videos?: IVideoResult[]
 }
 
-export interface MovieDetails extends BaseDetails {
+export interface IMovieDetails extends IBaseDetails {
   type: 'movie'
   title: string
   voteAverage: number
   releaseDate: string
 }
 
-export interface SeriesDetails extends BaseDetails {
+export interface ISeriesDetails extends IBaseDetails {
   type: 'series'
   title: string
   voteAverage: number
   firstAirDate: string
 }
 
-export interface ActorDetails extends BaseDetails {
+export interface IActorDetails extends IBaseDetails {
   type: 'actor'
   name: string
   birthday: string | null
   placeOfBirth: string | null
 }
 
-export type ContentDetails = MovieDetails | SeriesDetails | ActorDetails
+export type IContentDetails = IMovieDetails | ISeriesDetails | IActorDetails

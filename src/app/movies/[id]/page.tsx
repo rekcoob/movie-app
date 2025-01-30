@@ -1,9 +1,6 @@
-// app/movies/[id]/page.tsx
-
-import React from 'react'
-import DetailsView from '@/app/components/DetailsView'
-import { fetchMovieById } from '@/app/services/api'
-import { Movie, MovieDetails } from '@/app/types'
+import React, { Suspense } from 'react'
+import MovieDetails from '@/app/movies/MovieDetails'
+import Spinner from '@/app/components/Spinner' // Loading komponent
 
 export default async function MovieDetailsPage({
   params,
@@ -11,26 +8,10 @@ export default async function MovieDetailsPage({
   params: Promise<{ id: string }>
 }) {
   const { id } = await params
-  const movie: Movie = await fetchMovieById(Number(id))
 
-  const movieDetails: MovieDetails = {
-    type: 'movie',
-    id: movie.id,
-    title: movie.title,
-    imagePath: movie.poster_path,
-    description: movie.overview,
-    voteAverage: movie.vote_average,
-    releaseDate: movie.release_date,
-    videos: movie.videos?.results,
-    additionalInfo: (
-      <div className='genres'>
-        {movie.genres &&
-          movie.genres.map((genre, index) => (
-            <span key={genre.id}>{(index ? ', ' : '') + genre.name}</span>
-          ))}
-      </div>
-    ),
-  }
-
-  return <DetailsView item={movieDetails} />
+  return (
+    <Suspense fallback={<Spinner />}>
+      <MovieDetails id={id} />
+    </Suspense>
+  )
 }

@@ -1,9 +1,9 @@
 // components/VideoTrailer.tsx
 import React from 'react'
-import { VideoResult } from '@/app/types'
+import { IVideoResult } from '@/app/types'
 
 interface VideoTrailerProps {
-  videos?: VideoResult[]
+  videos?: IVideoResult[]
 }
 
 const VideoTrailer: React.FC<VideoTrailerProps> = ({ videos }) => {
@@ -15,7 +15,7 @@ const VideoTrailer: React.FC<VideoTrailerProps> = ({ videos }) => {
 
   return (
     <div className='video-trailer'>
-      <h3>Trailer</h3>
+      <h3>Trailer 🍿</h3>
       <div className='video-wrapper'>
         <iframe
           className='absolute top-0 left-0 w-full h-full rounded-lg'
