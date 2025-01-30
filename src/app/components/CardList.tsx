@@ -1,10 +1,9 @@
 // components/CardList.tsx
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import InfiniteScroll from './InfiniteScroll'
 import CardItem from './CardItem'
-import Spinner from './Spinner'
 import { IBaseItem } from '@/app/types'
 
 interface CardListProps<T extends IBaseItem> {
@@ -25,16 +24,9 @@ export default function CardList<T extends IBaseItem>({
   getDate = () => '',
 }: CardListProps<T>) {
   const [items, setItems] = useState<T[]>(initialData)
-  const [loading, setLoading] = useState(true)
   const [page, setPage] = useState(2) // Start from page 2 since page 1 is initial data
   const [hasMore, setHasMore] = useState(true)
   const [loadingNextPage, setLoadingNextPage] = useState(false)
-
-  useEffect(() => {
-    if (items.length > 0) {
-      setLoading(false)
-    }
-  }, [items])
 
   const loadItems = async (pageNum: number) => {
     try {
@@ -58,10 +50,6 @@ export default function CardList<T extends IBaseItem>({
       setPage((prev) => prev + 1)
       loadItems(page)
     }
-  }
-
-  if (loading) {
-    return <Spinner />
   }
 
   return (

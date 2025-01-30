@@ -1,5 +1,5 @@
 import React from 'react'
-import DetailsView from '@/app//components/DetailsView'
+import DetailsView from '@/app/components/DetailsView'
 import { fetchSeriesById } from '@/app/services/api'
 import { ISeries, ISeriesDetails } from '@/app/types'
 
