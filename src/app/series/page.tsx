@@ -2,10 +2,8 @@
 import { fetchSeries } from '../services/api'
 import SeriesClient from './SeriesClient'
 
-const SeriesListPage = async () => {
+export default async function SeriesListPage() {
   const initialData = await fetchSeries(1)
 
   return <SeriesClient initialData={initialData.results} />
 }
-
-export default SeriesListPage

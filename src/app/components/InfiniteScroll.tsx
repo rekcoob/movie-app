@@ -10,14 +10,14 @@ interface InfiniteScrollProps<T> {
   endComponent?: ReactNode
 }
 
-const InfiniteScroll = <T,>({
+export default function InfiniteScroll<T>({
   data,
   hasMore,
   onLoadMore,
   children,
   className = '',
   endComponent = <p>No More Items</p>,
-}: InfiniteScrollProps<T>) => {
+}: InfiniteScrollProps<T>) {
   const observerTarget = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -47,5 +47,3 @@ const InfiniteScroll = <T,>({
     </>
   )
 }
-
-export default InfiniteScroll

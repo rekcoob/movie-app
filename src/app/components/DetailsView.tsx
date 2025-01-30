@@ -14,7 +14,7 @@ interface DetailsItemProps {
   item: IContentDetails
 }
 
-const DetailsView: React.FC<DetailsItemProps> = ({ item }) => {
+export default function DetailsView({ item }: DetailsItemProps) {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -78,5 +78,3 @@ const DetailsView: React.FC<DetailsItemProps> = ({ item }) => {
     </div>
   )
 }
-
-export default DetailsView

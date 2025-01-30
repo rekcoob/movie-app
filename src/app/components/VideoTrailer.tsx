@@ -6,7 +6,7 @@ interface VideoTrailerProps {
   videos?: IVideoResult[]
 }
 
-const VideoTrailer: React.FC<VideoTrailerProps> = ({ videos }) => {
+export default function VideoTrailer({ videos }: VideoTrailerProps) {
   const trailer = videos?.find(
     (video) => video.site === 'YouTube' && video.type === 'Trailer'
   )
@@ -28,5 +28,3 @@ const VideoTrailer: React.FC<VideoTrailerProps> = ({ videos }) => {
     </div>
   )
 }
-
-export default VideoTrailer

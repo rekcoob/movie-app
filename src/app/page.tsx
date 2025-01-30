@@ -4,7 +4,7 @@ import React from 'react'
 import { fetchMovies } from './services/api'
 import MoviesClient from './movies/MoviesClient'
 
-const HomePage = async () => {
+export default async function HomePage() {
   const initialData = await fetchMovies(1)
 
   return (
@@ -14,5 +14,3 @@ const HomePage = async () => {
     />
   )
 }
-
-export default HomePage

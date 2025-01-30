@@ -20,7 +20,7 @@ interface ToggleFavoriteProps {
   item: Item
 }
 
-const ToggleFavorite: React.FC<ToggleFavoriteProps> = ({ item }) => {
+export default function ToggleFavorite({ item }: ToggleFavoriteProps) {
   const { toggleFavorite } = useFavorites()
   const [isFav, setIsFav] = useState(false)
 
@@ -62,5 +62,3 @@ const ToggleFavorite: React.FC<ToggleFavoriteProps> = ({ item }) => {
     </button>
   )
 }
-
-export default ToggleFavorite

@@ -1,11 +1,15 @@
 // types.ts
 
-// interface BaseItem {
-//   id: number
-//   description: string
-//   imagePath: string | null
-//   additionalInfo?: React.ReactNode
-// }
+export interface IBaseItem {
+  id: number
+  title?: string
+  name?: string // for TV shows and actors
+  poster_path?: string | null
+  profile_path?: string | null // for actors
+  vote_average?: number
+  release_date?: string
+  first_air_date?: string // for TV shows
+}
 
 interface IGenre {
   id: number
@@ -59,7 +63,6 @@ export interface IBaseDetails {
   description: string
   imagePath: string | null
   additionalInfo?: React.ReactNode
-  videos?: IVideoResult[]
 }
 
 export interface IMovieDetails extends IBaseDetails {
@@ -67,6 +70,7 @@ export interface IMovieDetails extends IBaseDetails {
   title: string
   voteAverage: number
   releaseDate: string
+  videos?: IVideoResult[]
 }
 
 export interface ISeriesDetails extends IBaseDetails {
@@ -74,6 +78,7 @@ export interface ISeriesDetails extends IBaseDetails {
   title: string
   voteAverage: number
   firstAirDate: string
+  videos?: IVideoResult[]
 }
 
 export interface IActorDetails extends IBaseDetails {

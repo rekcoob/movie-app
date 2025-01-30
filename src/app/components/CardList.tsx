@@ -5,19 +5,9 @@ import React, { useState, useEffect } from 'react'
 import InfiniteScroll from './InfiniteScroll'
 import CardItem from './CardItem'
 import Spinner from './Spinner'
+import { IBaseItem } from '@/app/types'
 
-interface BaseItem {
-  id: number
-  title?: string
-  name?: string // for TV shows and actors
-  poster_path?: string | null
-  profile_path?: string | null // for actors
-  vote_average?: number
-  release_date?: string
-  first_air_date?: string // for TV shows
-}
-
-interface CardListProps<T extends BaseItem> {
+interface CardListProps<T extends IBaseItem> {
   initialData: T[]
   fetchFunction: (page: number) => Promise<{ results: T[] }>
   getImagePath: (item: T) => string | null
@@ -26,7 +16,7 @@ interface CardListProps<T extends BaseItem> {
   getDate?: (item: T) => string
 }
 
-export default function CardList<T extends BaseItem>({
+export default function CardList<T extends IBaseItem>({
   initialData,
   fetchFunction,
   getImagePath,
@@ -38,15 +28,17 @@ export default function CardList<T extends BaseItem>({
   const [loading, setLoading] = useState(true)
   const [page, setPage] = useState(2) // Start from page 2 since page 1 is initial data
   const [hasMore, setHasMore] = useState(true)
+  const [loadingNextPage, setLoadingNextPage] = useState(false)
 
   useEffect(() => {
-    if (initialData.length > 0) {
+    if (items.length > 0) {
       setLoading(false)
     }
-  }, [initialData])
+  }, [items])
 
   const loadItems = async (pageNum: number) => {
     try {
+      setLoadingNextPage(true)
       const data = await fetchFunction(pageNum)
 
       if (data.results.length === 0) {
@@ -56,12 +48,16 @@ export default function CardList<T extends BaseItem>({
       setItems((prev) => [...prev, ...data.results])
     } catch (error) {
       console.error('Error fetching items:', error)
+    } finally {
+      setLoadingNextPage(false)
     }
   }
 
   const handleLoadMore = () => {
-    setPage((prev) => prev + 1)
-    loadItems(page)
+    if (!loadingNextPage && hasMore) {
+      setPage((prev) => prev + 1)
+      loadItems(page)
+    }
   }
 
   if (loading) {
